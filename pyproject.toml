@@ -10,7 +10,7 @@ readme = "README.md"
 requires-python = ">=3.10"
 dependencies = ["tzdata>=2024.1; sys_platform == 'win32'"]
 license = {file = "LICENSE"}
-authors = [{name = "Ren Zheng (任正), wechat 18332037566"}]
+authors = [{name = "Ren Zheng (任正)", email = "1626952981@qq.com"}]
 keywords = [
   "wearables", "health-data", "fitbit", "local-first", "privacy",
   "quantified-self", "personal-health-record", "consent", "digital-health",

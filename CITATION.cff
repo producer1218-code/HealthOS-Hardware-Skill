@@ -6,6 +6,7 @@ license: MIT
 authors:
   - name: Ren Zheng (任正)
     alias: producer1218-code
+    email: 1626952981@qq.com
 repository-code: "https://github.com/producer1218-code/healthos-open"
 keywords:
   - wearable data

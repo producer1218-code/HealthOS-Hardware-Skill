@@ -5,6 +5,7 @@
 | 项目 | 内容 |
 | --- | --- |
 | 姓名 | 任正 (Ren Zheng) |
+| 邮箱 (Email) | 1626952981@qq.com |
 | 微信 (WeChat) | 18332037566 |
 | 职业方向 | AI 硬件产品经理 (AI hardware product manager) |
 | 现就职 | 互联网大厂 (a major internet company) |
