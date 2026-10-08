@@ -1,0 +1,6 @@
+{
+  "provider": "openai_compatible",
+  "endpoint": "https://your-provider.example/v1/chat/completions",
+  "model": "your-compatible-model",
+  "api_key_env": "HEALTHOS_INTENT_KEY"
+}

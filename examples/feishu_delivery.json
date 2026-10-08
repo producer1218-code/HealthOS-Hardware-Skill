@@ -1,0 +1,6 @@
+{
+  "plugin": "healthos.feishu:FeishuDelivery",
+  "recipient_user_id": "local-person",
+  "receive_id_type": "open_id",
+  "receive_id": "replace-with-your-own-feishu-open-id"
+}

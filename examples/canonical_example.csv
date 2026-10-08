@@ -1,0 +1,4 @@
+timestamp,metric,value,unit,source,device_id,quality,context
+2026-07-01T08:00:00+08:00,resting_heart_rate_bpm,59,bpm,example-band,example-001,1,synthetic
+2026-07-01T08:00:00+08:00,hrv_rmssd_ms,42,ms,example-band,example-001,1,synthetic
+2026-07-01T08:00:00+08:00,sleep_minutes,450,min,example-band,example-001,1,synthetic

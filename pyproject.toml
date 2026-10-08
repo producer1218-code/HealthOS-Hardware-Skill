@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "healthos-open"
+version = "0.5.0.dev0"
+description = "Goal-driven, consent-aware wellness planning with pluggable wearable data and delivery"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = ["tzdata>=2024.1; sys_platform == 'win32'"]
+license = {file = "LICENSE"}
+authors = [{name = "Ren Zheng (任正), wechat 18332037566"}]
+keywords = ["wearables", "digital-health", "personal-baseline", "health-data"]
+classifiers = ["Programming Language :: Python :: 3", "License :: OSI Approved :: MIT License"]
+
+[project.scripts]
+healthos = "healthos.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+healthos = ["device_catalog.json", "ui.html"]

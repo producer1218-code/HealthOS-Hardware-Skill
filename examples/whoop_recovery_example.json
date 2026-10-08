@@ -1,0 +1,15 @@
+{
+  "kind": "recovery",
+  "records": [
+    {
+      "created_at": "2026-07-01T08:00:00Z",
+      "score_state": "SCORED",
+      "score": {
+        "resting_heart_rate": 60,
+        "hrv_rmssd_milli": 40,
+        "spo2_percentage": 97,
+        "skin_temp_celsius": 33.7
+      }
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+## v0.5 customer journey (current entry point)
+
+`healthos serve` opens the Chinese localhost UI; `start` is guided terminal intake, `watch` checks refreshed snapshots. `intent.py` has local guidance and per-use opt-in AI goal/question proposals with confirmation. `journey.py` creates explicit consent and emits care-v2 structured recommendations. `adapters/fitbit_takeout.py` reads observed ZIP/folder subsets of sleep/RHR/explicit RMSSD/steps before metric-specific loading. `server.py` binds only 127.0.0.1, checks Host/Origin/session token, provides feedback/revocation and adding separate sources. `care.py` separates personal-trend hypotheses from requested goal coaching during calibration; `outbox.py` controls actual sends. Sources, intent, advice and delivery are trusted replaceable plugins.
+
+Read README.zh-CN.md, docs/fitbit-onboarding.md, docs/plugins.md and docs/structured-advice.md first. Use `python examples/create_fitbit_demo.py` for recent synthetic archives; no real records/credentials in public files. Tests include real localhost HTTP and may require local socket permission. Legacy monitor is maintained for compatibility. No live vendor OAuth, clinical validation, voice recorder or authenticated phone feedback is implemented.
+
+# HealthOS Open
+
+Personal health monitoring research workbench: reproducible local adapters, per-device baselines, conservative notice policy and optional bring-your-own LLM narration.
+
+Status: research prototype, no clinical validation; do not present the threshold rules as medical advice or a hospital-endorsed algorithm.
+
+Start: README.md | README.zh-CN.md
+Named model inventory: docs/model-capabilities.md | src/healthos/device_catalog.json
+Goal intake and recommendation chain: docs/user-journey.md | src/healthos/guide.py | examples/user_profile.json
+Architecture and extension contracts: docs/architecture.md
+AI/code navigation: AI_CONTEXT.md
+Device-access evidence: docs/device-matrix.md | docs/device-matrix.csv
+Scientific evidence and limitations: docs/evidence-to-code.md | docs/literature.md | docs/method.md | docs/validation.md
+Canonical data schema: docs/data-contract.md
+Runnable code: src/healthos/ | tests/
+Synthetic demo: python -m healthos demo --output-dir demo-output
+Daily pass: python -m healthos monitor --config demo-output/monitor_config.json --as-of 2026-07-31 --output demo-output/monitor.json --state demo-output/state.json
+
+High-value contributions: verify a specific device/API field with an official source; add a permissioned adapter and synthetic contract tests; prospectively validate alert performance; improve missingness and context handling; translate explanations without turning correlation into diagnosis.
+
+
+## v0.5 development care workflow
+
+The new `onboard → connection-plan → care → dispatch → feedback` path supports voluntary metric/purpose consent, multiple sources, data-aware replanning, evidence-backed general-wellness actions, SQLite delivery/feedback and an opt-in Feishu text transport. `google-health-rhr-json` reads only a saved Fitbit RHR subset; no live OAuth is added. Existing `monitor` remains a legacy research path and its candidate-time JSON cooldown is not the new outbox semantics. See [personalized care](docs/personalized-care.md) for actual coverage and validation gaps.

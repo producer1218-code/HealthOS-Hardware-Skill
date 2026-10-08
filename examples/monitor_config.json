@@ -1,0 +1,7 @@
+{
+  "user_id": "local-pseudonym",
+  "goals": ["recovery", "sleep"],
+  "source": {"adapter": "csv", "path": "canonical_example.csv"},
+  "policy": {"plugin": "conservative", "cooldown_days": 7, "max_notices_per_7_days": 2},
+  "llm": {"provider": "none"}
+}

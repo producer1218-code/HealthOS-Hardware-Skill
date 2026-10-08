@@ -1,0 +1,27 @@
+{
+  "user_id": "demo-user",
+  "timezone": "Asia/Shanghai",
+  "goals": [
+    "sleep",
+    "recovery"
+  ],
+  "main_concern": "Synthetic profile only; choose real permissions through onboarding.",
+  "sources": [
+    {
+      "id": "wearable",
+      "adapter": "jsonl",
+      "path": "../care-output/demo/synthetic_observations.jsonl"
+    }
+  ],
+  "consents": [],
+  "preferences": {
+    "max_notices_per_7_days": 2,
+    "push_hours": [
+      9,
+      20
+    ],
+    "shift_work": false,
+    "disabled_actions": []
+  },
+  "advice_plugin": "guideline"
+}

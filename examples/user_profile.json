@@ -1,0 +1,6 @@
+{
+  "goals": ["recovery", "sleep"],
+  "selected_model_id": "whoop-5-0-and-mg",
+  "main_concern": "Understand whether my sleep and training recovery have changed.",
+  "max_notices_per_7_days": 2
+}

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<HealthData>
+  <Record type="HKQuantityTypeIdentifierRestingHeartRate" sourceName="Synthetic Watch" unit="count/min" endDate="2026-07-01 08:00:00 +0800" value="60"/>
+  <Record type="HKQuantityTypeIdentifierHeartRateVariabilitySDNN" sourceName="Synthetic Watch" unit="ms" endDate="2026-07-01 08:00:00 +0800" value="43"/>
+  <Record type="HKQuantityTypeIdentifierOxygenSaturation" sourceName="Synthetic Watch" unit="%" endDate="2026-07-01 08:00:00 +0800" value="0.97"/>
+</HealthData>
