@@ -194,7 +194,7 @@ class JourneyTests(unittest.TestCase):
         messages = []
         output = guided_start(self.root / "guided", ask=lambda prompt: next(answers), tell=messages.append)
         self.assertEqual(output["data_status"], "waiting_for_data")
-        saved = json.loads((self.root / "guided/profile.json").read_text())
+        saved = json.loads((self.root / "guided/profile.json").read_text(encoding="utf-8"))
         self.assertEqual([g["granted"] for g in saved["consents"]], [True, False, False])
         self.assertTrue(any("时区无法" in message for message in messages))
 
@@ -233,15 +233,17 @@ class LocalServerTests(unittest.TestCase):
         day = (datetime.now(timezone.utc).date() - timedelta(days=1)).isoformat()
         upload = self.post("/api/upload", json.dumps([sleep_record(day=day)]).encode(), {"X-Filename": "sleep-synthetic.json"}, raw=True)
         self.assertFalse((self.root / "profile.json").exists())
-        body = {"confirmed": True, "user_id": "synthetic-user", "request": "sleep", "goals": ["sleep"], "adapter": "fitbit-takeout", "file_id": upload["file_id"], "metrics": ["sleep_minutes"], "local_analysis": True, "notifications": True}
+        body = {"confirmed": True, "user_id": "synthetic-user", "request": "我想改善睡眠", "goals": ["sleep"], "adapter": "fitbit-takeout", "file_id": upload["file_id"], "metrics": ["sleep_minutes"], "local_analysis": True, "notifications": True}
         output = self.post("/api/setup", body)
         self.assertEqual(output["delivery_result"]["sent"], 1)
         notice = output["recommendations"][0]
         self.assertEqual(notice["delivery_status"], "sent")
+        with urlopen(self.url + "/api/latest", timeout=5) as response:
+            self.assertEqual(json.load(response)["recommendations"][0]["id"], notice["id"])
         self.assertTrue(self.post("/api/feedback", {"notice_id": notice["id"], "status": "not_relevant"})["saved"])
         self.assertEqual(self.post("/api/run", {})["recommendations"], [])
         self.post("/api/setup", dict(body, add_source=True, device_id="second-band"))
-        profile = json.loads((self.root / "profile.json").read_text())
+        profile = json.loads((self.root / "profile.json").read_text(encoding="utf-8"))
         self.assertEqual(len(profile["sources"]), 2)
         self.assertEqual(len({s["id"] for s in profile["sources"]}), 2)
         remaining = self.post("/api/disconnect", {"source_id": profile["sources"][0]["id"]})
@@ -254,7 +256,7 @@ class LocalServerTests(unittest.TestCase):
             self.post("/api/setup", {"confirmed": False})
         output = self.post("/api/setup", {"confirmed": True, "request": "sleep", "goals": ["sleep"], "metrics": ["sleep_minutes"]})
         self.assertEqual(output["recommendations"], [])
-        profile = json.loads((self.root / "profile.json").read_text())
+        profile = json.loads((self.root / "profile.json").read_text(encoding="utf-8"))
         self.assertTrue(all(not g["granted"] for g in profile["consents"]))
 
 

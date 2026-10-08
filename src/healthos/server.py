@@ -72,10 +72,10 @@ def make_server(workspace: Path, port: int = 8765, intent_settings: dict | None 
                               "external_configured": bool(delivery_settings and allow_external)})
             elif self.path == "/api/latest":
                 path = workspace / "latest.json"
-                result = json.loads(path.read_text()) if path.exists() else {"empty": True}
+                result = json.loads(path.read_text(encoding="utf-8")) if path.exists() else {"empty": True}
                 status_path = workspace / "background-status.json"
                 if status_path.exists():
-                    result["runtime_status"] = json.loads(status_path.read_text())
+                    result["runtime_status"] = json.loads(status_path.read_text(encoding="utf-8"))
                 self.respond(result)
             else:
                 self.respond({"error": "页面不存在。"}, 404)
@@ -120,7 +120,7 @@ def make_server(workspace: Path, port: int = 8765, intent_settings: dict | None 
                             raise ValueError("文件已不在当前会话，请重新选择。")
                         path = str(uploads[file_id]) if file_id else body.get("local_path", "")
                         previous_path = workspace / "profile.json"
-                        previous = json.loads(previous_path.read_text()) if previous_path.exists() else None
+                        previous = json.loads(previous_path.read_text(encoding="utf-8")) if previous_path.exists() else None
                         adding = body.get("add_source") is True and previous is not None
                         if adding and previous["user_id"] != body.get("user_id", "local-person"):
                             raise ValueError("添加入口时，本地代号必须与现有档案一致。")
@@ -141,7 +141,7 @@ def make_server(workspace: Path, port: int = 8765, intent_settings: dict | None 
                             raise ValueError("请先完成目标和授权。")
                         self.respond(run_saved(workspace, delivery_settings, allow_external))
                     elif self.path == "/api/feedback":
-                        profile = json.loads((workspace / "profile.json").read_text())
+                        profile = json.loads((workspace / "profile.json").read_text(encoding="utf-8"))
                         box = Outbox(workspace / "care.sqlite3")
                         try:
                             box.record_feedback(profile["user_id"], body["notice_id"], body["status"], datetime.now(timezone.utc), body.get("note", ""))
@@ -149,7 +149,7 @@ def make_server(workspace: Path, port: int = 8765, intent_settings: dict | None 
                             box.close()
                         self.respond({"saved": True, "message": "已记录。下轮将重新考虑行动适用性，不把感受直接当成因果证据。"})
                     elif self.path in {"/api/revoke", "/api/disconnect"}:
-                        profile = json.loads((workspace / "profile.json").read_text())
+                        profile = json.loads((workspace / "profile.json").read_text(encoding="utf-8"))
                         sid = body.get("source_id") if self.path == "/api/disconnect" else None
                         if self.path == "/api/disconnect":
                             if sid not in {s["id"] for s in profile["sources"]}:

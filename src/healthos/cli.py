@@ -136,8 +136,8 @@ def main(argv: list[str] | None = None) -> int:
     if args.command in {"start", "serve", "watch"}:
         from healthos.journey import guided_start, readable_summary
         from healthos.server import serve, run_saved
-        settings = json.loads(args.intent_settings.read_text()) if getattr(args, "intent_settings", None) else None
-        delivery = json.loads(args.delivery_settings.read_text()) if getattr(args, "delivery_settings", None) else None
+        settings = json.loads(args.intent_settings.read_text(encoding="utf-8")) if getattr(args, "intent_settings", None) else None
+        delivery = json.loads(args.delivery_settings.read_text(encoding="utf-8")) if getattr(args, "delivery_settings", None) else None
         if args.command == "start":
             output = guided_start(args.workspace, settings, args.allow_cloud_intent)
             return 2 if output["data_status"] == "source_error" else 0

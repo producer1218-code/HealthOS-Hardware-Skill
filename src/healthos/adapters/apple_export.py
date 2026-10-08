@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 from pathlib import Path
+from datetime import datetime
 from xml.etree.ElementTree import iterparse
 
 from healthos.model import METRICS, Observation
@@ -39,7 +40,7 @@ class AppleHealthExport:
                     continue
                 yield Observation(
                     user_id=user_id,
-                    timestamp=element.attrib["endDate"].replace(" ", "T", 1),
+                    timestamp=datetime.strptime(element.attrib["endDate"], "%Y-%m-%d %H:%M:%S %z").isoformat(),
                     metric=metric,
                     value=value,
                     unit=METRICS[metric][0],
