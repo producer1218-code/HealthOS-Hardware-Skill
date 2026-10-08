@@ -7,8 +7,8 @@
 | 姓名 | 任正 (Ren Zheng) |
 | 微信 (WeChat) | 18332037566 |
 | 职业方向 | AI 硬件产品经理 (AI hardware product manager) |
-| 现就职 | 京东 (JD.com) |
-| 既往经验 | 手机产品经理 (mobile phone product manager) |
+| 现就职 | 互联网大厂 (a major internet company) |
+| 既往经验 | 前手机产品经理 (former mobile phone product manager) |
 
 He initiated this repository: the wearable device/API access matrix, the research framing and the "research prototype, not a clinical claim" boundary all come from his product-side review of what is realistically obtainable from consumer wearables.
 

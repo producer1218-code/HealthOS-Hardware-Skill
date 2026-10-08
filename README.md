@@ -1,8 +1,16 @@
 # HealthOS Open
 
+[![tests](https://github.com/producer1218-code/healthos-open/actions/workflows/tests.yml/badge.svg)](https://github.com/producer1218-code/healthos-open/actions/workflows/tests.yml)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![Python 3.10 | 3.12](https://img.shields.io/badge/python-3.10%20%7C%203.12-blue.svg)](pyproject.toml)
+[![Local-first](https://img.shields.io/badge/data-stays%20local%20by%20default-2ea44f.svg)](SECURITY.md)
+[![No telemetry](https://img.shields.io/badge/telemetry-none-2ea44f.svg)](SECURITY.md)
+
 **User goals + voluntary wearable data → explainable, proactive wellness actions.** v0.5 development: a local, single-user application with a complete Fitbit export journey, structured advice, feedback and pluggable delivery.
 
 [中文完整指南](README.zh-CN.md) · [Fitbit import](docs/fitbit-onboarding.md) · [Feishu delivery](docs/personalized-care.md) · [Plugin contracts](docs/plugins.md) · [Output schema](docs/structured-advice.md)
+
+`Fitbit export` · `wearable health data` · `local-first` · `privacy` · `consent` · `HRV / resting heart rate / sleep / steps trends` · `quantified self` · `personal health record` · `Python` · `no telemetry`
 
 ```text
 Describe what matters → local guidance / opt-in AI proposal → confirm goals

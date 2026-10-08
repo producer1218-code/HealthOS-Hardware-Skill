@@ -1,8 +1,16 @@
 # HealthOS Open
 
+[![tests](https://github.com/producer1218-code/healthos-open/actions/workflows/tests.yml/badge.svg)](https://github.com/producer1218-code/healthos-open/actions/workflows/tests.yml)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![Python 3.10 | 3.12](https://img.shields.io/badge/python-3.10%20%7C%203.12-blue.svg)](pyproject.toml)
+[![本地优先](https://img.shields.io/badge/%E6%95%B0%E6%8D%AE-%E9%BB%98%E8%AE%A4%E4%B8%8D%E5%87%BA%E6%9C%AC%E6%9C%BA-2ea44f.svg)](SECURITY.md)
+[![无遥测](https://img.shields.io/badge/%E9%81%A5%E6%B5%8B-%E6%97%A0-2ea44f.svg)](SECURITY.md)
+
 **从需求出发，把用户自愿开放的设备数据变成可解释、可反馈的主动健康行动。** v0.5 开发版，以 Fitbit 官方导出为完整示例；本地网页和终端都可使用。
 
 [English](README.md) · [Fitbit 接入](docs/fitbit-onboarding.md) · [飞书与闭环](docs/personalized-care.md) · [插件接口](docs/plugins.md) · [输出结构](docs/structured-advice.md)
+
+`Fitbit 导出` · `可穿戴健康数据` · `本地优先` · `隐私` · `自愿授权` · `心率变异性 / 静息心率 / 睡眠 / 步数 趋势` · `自托管` · `Python` · `无遥测`
 
 ```text
 描述需求 → AI/本地引导提出目标 → 用户确认

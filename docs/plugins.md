@@ -2,6 +2,20 @@
 
 四个边界分别替换，均为可信 Python 插件；不是隔离沙箱。高级配置应放 `data/private/`。内置 UI 提供已声明入口，高级档案支持自定义模块与多来源。
 
+## 放入即用（drop-in）
+
+插件不需要打包安装：放进 `data/private/plugins/`，或用环境变量 `HEALTHOS_PLUGIN_PATH` 指向其它目录（多个目录用 `os.pathsep` 分隔），再用 `module:Class` 引用即可。
+
+```bash
+mkdir -p data/private/plugins
+cp examples/plugins/example_adapter.py data/private/plugins/
+healthos plugins
+```
+
+`healthos plugins` 会列出内置适配器、当前生效的插件目录，以及已发现的模块。来源配置里写 `"adapter": "example_adapter:ExampleSensorAdapter"`，并在自定义来源上声明 `metrics` 与 `setup_steps`；同一目录也可以放自定义 intent / advice / delivery 插件。
+
+**边界**：插件是与主程序同权限的可信代码，能读到进程能读到的一切；对真实健康记录使用前先审阅第三方插件。`data/private/` 已被 `.gitignore` 排除，插件不会被误提交。
+
 ## 需求理解
 
 `provider: local` 默认关键词匹配，明确标记非 AI。可用 `examples/intent_settings.json` 指定 HTTPS 兼容接口、model、api_key_env；设置环境变量后：

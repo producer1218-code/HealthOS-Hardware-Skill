@@ -72,6 +72,7 @@ def main(argv: list[str] | None = None) -> int:
     sample = sub.add_parser("demo", help="make deterministic, entirely synthetic example")
     sample.add_argument("--output-dir", default=Path("demo-output"), type=Path)
     sub.add_parser("adapters", help="list bundled adapters")
+    sub.add_parser("plugins", help="list bundled adapters and user plugin drop-ins")
     devices = sub.add_parser("devices", help="compare usable data-access paths for goals")
     devices.add_argument("--goal", action="append", choices=sorted(GOAL_METRICS), default=[])
     devices.add_argument("--include-unbuilt", action="store_true")
@@ -213,8 +214,23 @@ def main(argv: list[str] | None = None) -> int:
         write_json(args.output, output)
         write_json(args.state, state)
         print(f"wrote {len(output['notices'])} new local notices to {args.output}")
+    elif args.command == "plugins":
+        from healthos.adapters import BUILTIN_ADAPTERS
+        from healthos.plugins import DEFAULT_DIR, ENV_VAR, discover, plugin_dirs
+
+        print(json.dumps({
+            "bundled_adapters": sorted(BUILTIN_ADAPTERS),
+            "custom_adapter_syntax": "module:Class",
+            "drop_in_dir": str(DEFAULT_DIR),
+            "env_var": ENV_VAR,
+            "active_plugin_dirs": [str(path) for path in plugin_dirs()],
+            "discovered_modules": discover(),
+            "note": "Plugins are trusted Python, not a sandbox; inspect them before pointing them at real records.",
+        }, indent=2, ensure_ascii=False))
     else:
-        print("fitbit-takeout\ncsv\napple-health-xml\nwhoop-v2-json\njsonl\ngoogle-health-rhr-json\nmodule:Class custom adapter")
+        from healthos.adapters import BUILTIN_ADAPTERS
+
+        print("\n".join((*BUILTIN_ADAPTERS, "module:Class custom adapter")))
     return 0
 
 

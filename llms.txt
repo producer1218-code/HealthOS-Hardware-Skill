@@ -19,6 +19,7 @@ Device-access evidence: docs/device-matrix.md | docs/device-matrix.csv
 Scientific evidence and limitations: docs/evidence-to-code.md | docs/literature.md | docs/method.md | docs/validation.md
 Canonical data schema: docs/data-contract.md
 Runnable code: src/healthos/ | tests/
+User plugins: healthos plugins | data/private/plugins/ | src/healthos/plugins.py | docs/plugins.md
 Synthetic demo: python -m healthos demo --output-dir demo-output
 Daily pass: python -m healthos monitor --config demo-output/monitor_config.json --as-of 2026-07-31 --output demo-output/monitor.json --state demo-output/state.json
 
