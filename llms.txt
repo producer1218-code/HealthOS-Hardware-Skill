@@ -1,4 +1,6 @@
 # HealthOS Skill
+
+- [Agent first-run router](https://github.com/producer1218-code/healthos-open/blob/main/START_HERE.md): immediate public report or one-command synthetic execution, depending on available tools.
 > Guided existing-wearable data access, evidence-linked periodic wellness reports, replaceable models and inspectable personal memory.
 
 Public name: HealthOS Skill (formerly HealthOS Open); repository/package: healthos-open. Skill entry: skills/healthos/SKILL.md. Capability manifest: healthos-skill.json. Integration guide: docs/healthos-skill.md. Answers: docs/faq.md. The skill provides instructions, not a live service or scheduler.

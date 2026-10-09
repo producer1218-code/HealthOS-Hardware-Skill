@@ -17,6 +17,8 @@
 
 ## 如何交给自己的 Agent
 
+最短路径：把 [START_HERE.md](../START_HERE.md) 的公开链接交给 Agent。它按实际工具选择立即讲解合成报告，或一条命令运行生产分析器。无需先填写 LLM key；真实账号、数据和持续运行在体验之后逐项确认。[操作与限制](agent-quickstart.md)。
+
 无需安装的方式：把 [SKILL.md](../skills/healthos/SKILL.md) 与相邻的 references/workflow.md 交给你的 Agent，或让它读这个仓库。它应先解释实际可取得的字段和访问资格，再收集用户目标。
 
 支持目录式 Agent Skills 的宿主：下载仓库，将 **整个 skills/healthos 文件夹** 放到宿主配置的 Skill 目录，保持 SKILL.md、agents/ 和 references/ 的相对位置；按宿主文档加载。不要只复制文件名，也不需要把健康记录或密钥放进去。格式依据：[Agent Skills 标准](https://agentskills.io/specification)、[OpenAI Skills 文档](https://developers.openai.com/api/docs/guides/tools-skills)。

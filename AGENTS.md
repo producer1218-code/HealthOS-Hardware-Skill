@@ -1,5 +1,7 @@
 # HealthOS Skill agent brief — v0.6 development
 
+For a user trying the product, begin with START_HERE.md and docs/agent-quickstart.md: explain the public report or execute scripts/agent_start.py for a synthetic first result. Use only tools actually available, honor host permissions, and never claim a URL has installed a skill or started monitoring. For repository maintenance, continue with the development brief below.
+
 Public name: HealthOS Skill (formerly HealthOS Open); repository/package: healthos-open. Skill entry: skills/healthos/SKILL.md. Capability manifest: healthos-skill.json. Integration guide: docs/healthos-skill.md. Answers: docs/faq.md. The skill provides instructions, not a live service or scheduler.
 
 Start with README.zh-CN.md, docs/start-here.md, docs/public-demo.md, docs/google-health-connect.md, docs/report-methodology.md and docs/agent-handoff.md. Public GitHub reading must work without installation. Put localhost instructions only in explicit personal-deployment or developer sections. site/index.html is a fixed synthetic, dependency-free public demo, not the production analyzer. Never claim Pages is live without verified deployment. The product goal is a guided existing-wearable → personal agent → periodic evidence-linked report → explicit feedback/memory journey.

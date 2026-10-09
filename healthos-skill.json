@@ -12,6 +12,8 @@
   "license": "MIT",
   "summary": "Guided wearable-to-agent data access, evidence-linked periodic wellness reports, BYO LLM and inspectable user memory.",
   "entrypoints": {
+    "first_run": "START_HERE.md",
+    "first_run_contract": "agent-start.json",
     "skill": "skills/healthos/SKILL.md",
     "user": "docs/start-here.md",
     "methods": "docs/report-methodology.md",

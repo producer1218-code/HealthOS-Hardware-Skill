@@ -1,5 +1,7 @@
 # HealthOS Skill — personal health agents for wearable data
 
+**Start with your agent:** give it [START_HERE.md](START_HERE.md). It can explain a complete synthetic report immediately; with Python execution tools it can run the first experience in one command, without installing HealthOS or providing an LLM key. [How it works](docs/agent-quickstart.md). Real-device access and ongoing monitoring still need your setup and permission.
+
 [![tests](https://github.com/producer1218-code/healthos-open/actions/workflows/tests.yml/badge.svg)](https://github.com/producer1218-code/healthos-open/actions/workflows/tests.yml)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
