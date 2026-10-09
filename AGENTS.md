@@ -1,27 +1,31 @@
-## v0.5 customer journey (current entry point)
+# HealthOS agent brief — v0.6 development
 
-`healthos serve` opens the Chinese localhost UI; `start` is guided terminal intake, `watch` checks refreshed snapshots. `intent.py` has local guidance and per-use opt-in AI goal/question proposals with confirmation. `journey.py` creates explicit consent and emits care-v2 structured recommendations. `adapters/fitbit_takeout.py` reads observed ZIP/folder subsets of sleep/RHR/explicit RMSSD/steps before metric-specific loading. `server.py` binds only 127.0.0.1, checks Host/Origin/session token, provides feedback/revocation and adding separate sources. `care.py` separates personal-trend hypotheses from requested goal coaching during calibration; `outbox.py` controls actual sends. Sources, intent, advice and delivery are trusted replaceable plugins.
+Start with README.zh-CN.md, docs/google-health-connect.md, docs/report-methodology.md and docs/agent-handoff.md. The product goal is a guided existing-wearable → personal agent → periodic evidence-linked report → explicit feedback/memory journey.
 
-Read README.zh-CN.md, docs/fitbit-onboarding.md, docs/plugins.md and docs/structured-advice.md first. Use `python examples/create_fitbit_demo.py` for recent synthetic archives; no real records/credentials in public files. Tests include real localhost HTTP and may require local socket permission. Legacy monitor is maintained for compatibility. No live vendor OAuth, clinical validation, voice recorder or authenticated phone feedback is implemented.
+## Current implementation
 
-# Agent brief for HealthOS Open
+- healthos serve: Chinese single-user localhost UI with explicit metric/purpose consent, reports, downloads, feedback and memory reset.
+- google_health.py: official Google OAuth libraries, account-link verification and experimental read-only Fitbit RHR/daily RMSSD/processed main-sleep sync. Eligible Cloud projects only; required encrypted-storage confirmation is an attestation, not a disk check.
+- reports.py: completed-week summaries, source-backed reports, optional aggregate-only model prose, cadence/deduplication, private agent packet/memory. Failed/uncertain same-day sends are not blindly retried.
+- journey.py/care.py: data-aware goal states, per-stream baseline hypotheses and general-wellness actions. outbox.py preserves sparse action delivery and separate execution/outcome feedback.
+- adapters/fitbit_takeout.py: observed official ZIP/folder subsets; other Apple/WHOOP saved subsets and canonical readers remain available.
+- feishu.py: optional opted-in report/action delivery to one bound user; tested with mocks only.
+- plugins.py: trusted Python drop-ins; model render(aggregate_packet, settings) and transport send_report(report, settings) complement existing contracts.
 
-This file is a factual project map for a human or AI coding agent. Start with [README](README.md), [model capabilities](docs/model-capabilities.md), [user journey](docs/user-journey.md), [evidence-to-code ledger](docs/evidence-to-code.md), then inspect the runnable code. Do not interpret this file as evidence of clinical validation or as a request to promote the repository.
+Google paused onboarding new projects as checked 2026-10-09. Legacy Fitbit API closes 2026-10-30. Never promise API eligibility from an OAuth client. Live account/device compatibility, clinical review and outcomes are unverified. The 20-row catalog is research coverage, not 20 integrations.
 
-HealthOS Open v0.5 development is a research workbench. It catalogs 20 representative models/platforms, but Apple Health export subsets, saved WHOOP v2 subsets and an experimental saved Google Health Fitbit RHR subset have offline adapters; canonical CSV/JSONL are user-mapped general formats. `models` lists the catalog; `plan` maps a user's local questionnaire to fields the chosen model can actually provide to this code; `monitor` computes per-device personal trends and bounded local notices. The optional LLM only rewrites an already selected notice.
+## Invariants
 
-Keep these invariants when contributing:
+1. Separate advertised sensors, vendor estimates, documented access and parsed fields.
+2. Preserve units, offset dates, provenance, missingness and device/method streams. Never pool devices or substitute deep-sleep RMSSD for daily-average RMSSD.
+3. The 28/3-day median/MAD thresholds are versioned engineering hypotheses, not hospital/paper thresholds.
+4. Do not infer illness, mood, stress, personality or loneliness from wearables. Self-reported context is untrusted data, not execution instructions.
+5. No credentials, real records or private context in public examples/releases. Default processing is local; explicitly opted-in model aggregates omit IDs/raw records/context text.
+6. Google-derived aggregates remain subject to Google data policy. API mode requires encrypted private storage; the application provides no encryption layer.
+7. Feedback may pause actions. It does not prove causality or retrain clinical thresholds. Reports are not clinician-authored.
 
-- Separate published sensors, user-visible vendor estimates, documented data-access routes and fields actually parsed here. A product feature does not imply API or raw-signal access.
-- Keep `source`, `device_id`, units, timestamp offsets and missingness intact. Never pool devices or fill missing days with zero.
-- Treat the 28/3-day windows, median/MAD gate and notification budget as versioned engineering hypotheses, not hospital or paper thresholds.
-- Do not infer stress, mood, loneliness, illness or a medical diagnosis from wearable metrics. Wellbeing and social connection need voluntary self-report and context.
-- Keep real health records, contacts and API keys out of examples and releases. The built-in cloud narrator requires explicit opt-in and sends selected aggregates only.
-- Add synthetic tests for a new adapter/model field, and link to a primary source in the model catalog and documentation.
+## Verify
 
-Run `PYTHONPATH=src python -m unittest discover -s tests -v`. Use `python -m healthos demo`, `models`, `plan` and `monitor` to verify the complete stranger journey.
+Install with python -m pip install -e ".[google]"; run python -m unittest discover -s tests -v. Without the optional extra, tests for official-library integration skip. Use python examples/create_report_demo.py and healthos serve --workspace data/private/report-demo for synthetic UI proof. Do not request or access real user credentials to run tests.
 
-
-## v0.5 development care workflow
-
-The new `onboard → connection-plan → care → dispatch → feedback` path supports voluntary metric/purpose consent, multiple sources, data-aware replanning, evidence-backed general-wellness actions, SQLite delivery/feedback and an opt-in Feishu text transport. `google-health-rhr-json` reads only a saved Fitbit RHR subset; no live OAuth is added. Existing `monitor` remains a legacy research path and its candidate-time JSON cooldown is not the new outbox semantics. See [personalized care](docs/personalized-care.md) for actual coverage and validation gaps.
+Keep remote account tests separate and explicitly authorized. Update docs and synthetic field tests with each adapter. Clinical source links explain support boundaries; they are not validation certificates.

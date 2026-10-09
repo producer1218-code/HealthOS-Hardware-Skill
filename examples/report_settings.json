@@ -1,0 +1,5 @@
+{
+  "enabled": true,
+  "interval_days": 7,
+  "llm": {"provider": "none"}
+}

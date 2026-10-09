@@ -1,3 +1,7 @@
+# v0.6 live/report route update
+
+For a Fitbit Air user, start with [Google Health connection](google-health-connect.md). In addition to the export fields below, experimental google-health-api and google-health-json readers now parse Fitbit daily RHR, daily-average RMSSD and processed main-sleep duration. They do not parse live steps, SpO2 or temperature. Google project eligibility and OS-encrypted storage are required for live access; no real-account/device verification has been completed. The original table remains the export/catalog view, not proof of live model support.
+
 # 按型号查：能测什么、能取到什么、当前代码能读什么
 
 研究快照：2026-10-08。这里的 20 行是**代表型号、型号组或平台**，不是 20 款已适配设备。请先区分三件事：公开资料称设备有传感器、用户产品会显示估算指标、第三方软件在许可下可取得的数据。只有“本仓库实际可读取”列列出的字段已有离线解析代码；具体型号/地区/固件仍需样例导出确认。每行来源链接可能只证明产品或数据接入的一部分，不能单独证明该行所有传感器、字段和准确性。

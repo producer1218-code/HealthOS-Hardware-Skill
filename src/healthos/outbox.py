@@ -170,3 +170,5 @@ class Outbox:
         with self.db:
             self.db.execute("DELETE FROM feedback WHERE user_id=?", (user_id,))
             self.db.execute("DELETE FROM notices WHERE user_id=?", (user_id,))
+            if self.db.execute("SELECT 1 FROM sqlite_master WHERE name='health_reports'").fetchone():
+                self.db.execute("DELETE FROM health_reports WHERE user_id=?", (user_id,))

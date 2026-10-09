@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "healthos-open"
-version = "0.5.0.dev0"
+version = "0.6.0.dev0"
 description = "Goal-driven, consent-aware wellness planning with pluggable wearable data and delivery"
 readme = "README.md"
 requires-python = ">=3.10"
@@ -29,6 +29,9 @@ Homepage = "https://github.com/producer1218-code/healthos-open"
 Source = "https://github.com/producer1218-code/healthos-open"
 Issues = "https://github.com/producer1218-code/healthos-open/issues"
 Releases = "https://github.com/producer1218-code/healthos-open/releases"
+
+[project.optional-dependencies]
+google = ["google-auth>=2.29,<3", "google-auth-oauthlib>=1.2,<2", "requests>=2.31,<3"]
 
 [project.scripts]
 healthos = "healthos.cli:main"

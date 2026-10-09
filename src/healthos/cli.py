@@ -133,8 +133,55 @@ def main(argv: list[str] | None = None) -> int:
     watcher.add_argument("--once", action="store_true")
     watcher.add_argument("--delivery-settings", type=Path)
     watcher.add_argument("--allow-external-delivery", action="store_true")
+    google = sub.add_parser("connect-google", help="guided user-started Google Health OAuth; eligible projects only")
+    google.add_argument("--client", required=True, type=Path)
+    google.add_argument("--connection", type=Path, default=Path("data/private/personal/google"))
+    google.add_argument("--metric", action="append", required=True, choices=["resting_heart_rate_bpm", "hrv_rmssd_ms", "sleep_minutes"])
+    google.add_argument("--port", type=int, default=8766)
+    google.add_argument("--encrypted-storage-confirmed", action="store_true", help="confirm client, tokens and entire private workspace are on encrypted storage; HealthOS does not verify disk encryption")
+    report_config = sub.add_parser("configure-reports", help="save explicit periodic-report and model settings")
+    report_config.add_argument("--workspace", type=Path, default=Path("data/private/personal"))
+    report_config.add_argument("--settings", required=True, type=Path)
+    report_config.add_argument("--allow-cloud-report", action="store_true", help="allow deidentified metric aggregates to the configured model")
+    report_run = sub.add_parser("report", help="generate one consent-aware report from the saved profile")
+    report_run.add_argument("--workspace", type=Path, default=Path("data/private/personal"))
+    memory_reset = sub.add_parser("forget-memory", help="clear local report history, answers and feedback; keep exports and goals")
+    memory_reset.add_argument("--workspace", type=Path, default=Path("data/private/personal"))
     args = parser.parse_args(argv)
-    if args.command in {"start", "serve", "watch"}:
+    if args.command == "connect-google":
+        from healthos.google_health import authorize
+        print("Google Health 新项目目前暂停接入；此连接器仅适用于已获准项目。浏览器将显示你选择的只读授权。")
+        authorize(args.client, args.connection, args.metric, args.port, args.encrypted_storage_confirmed)
+        print(f"连接已保存到 {args.connection}。在本地页面选择 Google Health API 和此目录，再确认指标与用途。")
+    elif args.command == "configure-reports":
+        settings = json.loads(args.settings.read_text(encoding="utf-8"))
+        if not isinstance(settings.get("enabled", False), bool) or isinstance(settings.get("interval_days", 7), bool) or not isinstance(settings.get("interval_days", 7), int) or not 1 <= settings.get("interval_days", 7) <= 30:
+            parser.error("报告间隔需为 1–30 天；enabled 必须为布尔值")
+        llm = settings.setdefault("llm", {"provider": "none"})
+        if "api_key" in llm:
+            parser.error("密钥放环境变量，配置只填写 api_key_env")
+        llm["share_aggregates"] = bool(args.allow_cloud_report)
+        write_json(args.workspace / "report-settings.json", settings)
+        print("已保存报告配置；报告仍需有效的指标分析与通知授权。模型发送聚合指标：" + str(llm["share_aggregates"]))
+    elif args.command in {"report", "forget-memory"}:
+        from healthos.reports import forget_memory, report_tick
+        profile = json.loads((args.workspace / "profile.json").read_text(encoding="utf-8"))
+        if args.command == "forget-memory":
+            forget_memory(profile, args.workspace)
+            print("已清除本地生成的报告、背景回答和反馈；原始导出、目标、连接和外部已发送副本需单独管理。")
+        else:
+            now = datetime.now(timezone.utc)
+            as_of = now.astimezone(ZoneInfo(profile.get("timezone", "Asia/Shanghai"))).date() - timedelta(days=1)
+            box = Outbox(args.workspace / "care.sqlite3")
+            try:
+                output = care_once(profile, args.workspace, as_of, now, box.feedback_for(profile["user_id"]))
+                path = args.workspace / "report-settings.json"
+                settings = json.loads(path.read_text(encoding="utf-8")) if path.exists() else {}
+                result = report_tick(profile, output, args.workspace, now, box, dict(settings, enabled=True), force=True)
+                print(result["latest"]["markdown"] if "latest" in result else result["status"])
+            finally:
+                box.close()
+    elif args.command in {"start", "serve", "watch"}:
         from healthos.journey import guided_start, readable_summary
         from healthos.server import serve, run_saved
         settings = json.loads(args.intent_settings.read_text(encoding="utf-8")) if getattr(args, "intent_settings", None) else None

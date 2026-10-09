@@ -1,3 +1,7 @@
+# Current v0.6 entry
+
+The complete consumer journey is now [README.zh-CN.md](../README.zh-CN.md): existing wearable → guided data access → goals and consent → replaceable model → periodic report → feedback and memory. Follow [Fitbit Air / Google setup](google-health-connect.md) and inspect a [synthetic report](sample-health-report.md). The older plan/monitor workflow below is retained as research history; new users should use serve and report/watch.
+
 # 当前 v0.5 使用入口
 
 从 [本地交互快速开始](../README.zh-CN.md) 与 [Fitbit 导入](fitbit-onboarding.md) 开始。下面保留型号目录与旧研究链路说明；新入口使用 `serve/start/watch` 和 care-v2，不要求先写 profile JSON。

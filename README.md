@@ -2,83 +2,108 @@
 
 [![tests](https://github.com/producer1218-code/healthos-open/actions/workflows/tests.yml/badge.svg)](https://github.com/producer1218-code/healthos-open/actions/workflows/tests.yml)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
-[![Python 3.10 | 3.12](https://img.shields.io/badge/python-3.10%20%7C%203.12-blue.svg)](pyproject.toml)
-[![Local-first](https://img.shields.io/badge/data-stays%20local%20by%20default-2ea44f.svg)](SECURITY.md)
-[![No telemetry](https://img.shields.io/badge/telemetry-none-2ea44f.svg)](SECURITY.md)
 
-**User goals + voluntary wearable data → explainable, proactive wellness actions.** v0.5 development: a local, single-user application with a complete Fitbit export journey, structured advice, feedback and pluggable delivery.
+**Turn the wearable you already own into a guided, personal health agent: connect permitted data, plug in your model, receive evidence-linked periodic reports, and refine the plan through feedback.**
 
-[中文完整指南](README.zh-CN.md) · [Fitbit import](docs/fitbit-onboarding.md) · [Feishu delivery](docs/personalized-care.md) · [Plugin contracts](docs/plugins.md) · [Output schema](docs/structured-advice.md)
+v0.6 development: Chinese localhost onboarding, Fitbit exports, an experimental Google Health OAuth/read-only connector, periodic Markdown/JSON reports, replaceable LLM commentary, inspectable personal memory and optional Feishu delivery. Reports use professional observation structure and primary sources; they are not clinician-authored or clinically validated.
 
-`Fitbit export` · `wearable health data` · `local-first` · `privacy` · `consent` · `HRV / resting heart rate / sleep / steps trends` · `quantified self` · `personal health record` · `Python` · `no telemetry`
+[中文完整指南](README.zh-CN.md) · [Fitbit Air / Google connection](docs/google-health-connect.md) · [Read a synthetic report](docs/sample-health-report.md) · [Methodology](docs/report-methodology.md) · [Bring your own agent](docs/agent-handoff.md)
 
-```text
-Describe what matters → local guidance / opt-in AI proposal → confirm goals
-→ choose existing hardware → consent to metrics and purposes
-→ check actual coverage → device-specific trends / requested goal coaching
-→ structured action → local or Feishu delivery → execution and outcome feedback
-```
+## The journey
 
-## Start
+~~~text
+My existing wearable + my goals
+→ guided export or eligible OAuth access
+→ explicit metric and purpose consent
+→ source/device/method-specific quality and personal trends
+→ periodic evidence-linked report + optional BYO-model explanation
+→ local or opted-in phone delivery
+→ execution and outcome feedback → inspectable personal memory
+~~~
 
-Python 3.10+ (3.12 recommended), no runtime dependencies on macOS/Linux; Windows installs timezone data. The interface currently uses Chinese; the CLI and schema use stable English identifiers.
+A Fitbit Air user can discover how their sleep, resting heart rate and HRV records become a useful report, instead of needing to interpret the vendor app. HealthOS explains access routes and fields before requesting permission.
 
-```bash
+**Access status, checked 2026-10-09:** [Google](https://developers.google.com/health) is currently not onboarding new Health API projects; the legacy Fitbit Web API shuts down on 2026-10-30. Creating an OAuth client does not grant project eligibility. Eligible users can try the experimental connector; others can start with official exports. Neither live Fitbit Air compatibility nor clinical benefit has been verified.
+
+## Try a complete synthetic journey
+
+Python 3.10+, with 3.12 recommended. Windows installs timezone data.
+
+~~~bash
 git clone https://github.com/producer1218-code/healthos-open.git
 cd healthos-open
-python3.12 -m venv .venv
+python -m venv .venv
+# macOS/Linux
 source .venv/bin/activate
+# Windows: .venv\Scripts\Activate.ps1
 python -m pip install -e .
+python examples/create_report_demo.py
+healthos serve --workspace data/private/report-demo
+~~~
+
+Open http://127.0.0.1:8765. The demo makes no vendor, LLM or Feishu calls. Use a separate real-user workspace and grant its permissions explicitly.
+
+## Connect real data
+
+Run healthos serve using the default data/private/personal workspace. Confirm goals and voluntary context, select a source, select metrics, separately authorize analysis/notices/external delivery, and enable periodic reports.
+
+| Route | Working fields | Status |
+| --- | --- | --- |
+| Fitbit ZIP/folder export | sleep duration, RHR, explicit RMSSD, steps | observed export subsets; refresh manually |
+| Google Health API / saved v4 JSON | Fitbit daily RHR, daily-average RMSSD, processed main-sleep duration | experimental; eligible projects only; no live steps/SpO2/temperature |
+| Apple Health XML | HR, RHR, SDNN, SpO2, sleeping wrist temperature | subset; no sleep duration or steps |
+| Saved WHOOP v2 JSON | RHR, RMSSD, SpO2, skin temperature, sleep duration, respiratory rate | offline subset; user supplies authorized responses |
+| CSV / JSONL / custom Python | explicit canonical metrics | user-mapped; no model validation implied |
+
+The [20-row device catalog](docs/model-capabilities.md) is research coverage, not 20 validated integrations. Public estimates do not imply raw signal access. Provisional Google metadata cannot reliably distinguish two identical devices.
+
+For eligible Google projects, follow the [step-by-step guide](docs/google-health-connect.md), including account linking, callback configuration, encrypted storage and consent:
+
+~~~bash
+python -m pip install -e ".[google]"
+healthos connect-google --client data/private/personal/client.secrets.json --connection data/private/personal/google --metric sleep_minutes --metric resting_heart_rate_bpm --metric hrv_rmssd_ms --encrypted-storage-confirmed
+~~~
+
+Choose Google Health API in the UI and the absolute connection directory. The official Google OAuth libraries open the system browser. Google requires encrypted health data and tokens at rest: the connector requires explicit confirmation of OS-encrypted storage, but does not inspect or provide disk encryption.
+
+## Plug in your LLM
+
+Reports work without a model. Copy examples/report_settings_llm.json into your private workspace, configure endpoint/model/api_key_env, set your key in that environment variable, then:
+
+~~~bash
+healthos configure-reports --settings data/private/personal/report-settings.local.json --allow-cloud-report
 healthos serve
-```
+~~~
 
-Open `http://127.0.0.1:8765`. Describe your sleep, recovery or activity goal, confirm the proposed goals, answer optional questions, choose an export, then explicitly select metrics and purposes. Analysis, proactive notices and external delivery are separate, default-off permissions. No file yet? Save a waiting plan. Windows: use `py -3.12` and `.venv\Scripts\Activate.ps1`.
+A compatible Chat Completions JSON endpoint receives allowlisted aggregates, goal identifiers and feedback counts. No IDs, raw records, dates, paths, tokens or free-text context are sent by the bundled renderer. Other providers implement render(aggregate_packet, settings) as a trusted module:Class plugin. The page exposes the configured recipient and sharing control.
 
-Fitbit users download an archive through [Google Takeout / the official account export route](https://support.google.com/googlehealth/answer/14236615). The reader supports observed subsets of sleep, resting heart rate, explicit RMSSD HRV and interval steps in ZIPs or folders. It preserves formats and origins, skips Apple-imported measurements in the Fitbit route and rejects conflicting records. It does not implement vendor OAuth. Export coverage varies; a user-declared device binding cannot identify multiple devices inside an inseparable archive.
+The model returns explanatory draft prose/questions; deterministic tables, evidence and actions remain intact. Schema and numerical checks are limited guards, not proof that prose is accurate. On model failure, the source-backed local report remains available. Google derived/aggregated records remain subject to its [user data policy](https://developers.google.com/health/policies/health-api-developer-user-data-policy).
 
-## Try without an account
+## Reports, delivery and learning
 
-```bash
-python examples/create_fitbit_demo.py
-healthos serve --workspace data/private/synthetic-person
-```
+The page offers 7/14/30-day delivery cadence. The first report appears on the next pass; later reports follow the previous analysis date. Each report describes the last seven completed dates, independent of delivery cadence. Keep serve or watch running on your computer; GitHub does not execute your private monitoring.
 
-Select `data/private/synthetic-fitbit.zip` in the page. It contains recent, explicitly synthetic records. Confirm sleep/recovery goals and permissions to see evidence, feedback controls and downloadable JSON.
+Default delivery writes reports/*.md and JSON and renders the report locally. An opted-in Feishu transport can send observations/actions to a bound recipient:
 
-![Synthetic action and feedback](docs/synthetic-plan.png)
-
-`healthos start` offers terminal guidance. `healthos watch --once` runs an existing private profile once; `watch` and `serve` check updated exports every hour by default. The default workspace is `data/private/personal`.
-
-## Proactive delivery
-
-Local JSON delivery works out of the box. Configure the optional Feishu application bot to receive summaries on your phone:
-
-```bash
+~~~bash
 healthos serve --delivery-settings data/private/feishu_delivery.json --allow-external-delivery
-```
+~~~
 
-Follow the [Feishu setup](docs/personalized-care.md#飞书设置), set credentials in environment variables, bind your own recipient, and opt in to external summary delivery in the page. Feishu sends text; feedback currently happens in the local page, not through authenticated phone callbacks. Transports have mocked tests, not a verified real-account send.
+[Feishu setup](docs/personalized-care.md#飞书设置). Free-text personal history stays local. Mocked transport tests do not establish a real-account send; phone feedback is not implemented. Periodic reports and sparse action reminders use separate ledgers. Stable IDs prevent duplicate reports; failed/uncertain same-day sends require inspection rather than blind retries.
 
-Exports are **snapshots**. A running process cannot invent new measurements: update the chosen directory/file, or reselect an uploaded ZIP. Do not run competing transports against the same queue without understanding delivery semantics.
+Memory contains confirmed goals, volunteered context, coverage, execution/outcome counts and paused actions. Feedback updates action suitability, not clinical thresholds or causal conclusions. Review memory.json or use healthos forget-memory. This clears local generated reports/context/feedback while preserving exports, connections and goals; external copies need separate deletion.
 
-## Advice, consent and learning boundaries
+Your own agent can use agent-packet.json under the [handoff contract](docs/agent-handoff.md), rather than reading credentials.
 
-Personal-trend actions use separate device/source/method streams and versioned 28/3-day median/MAD rules, with at least 14 valid baseline days. These thresholds are **unvalidated engineering hypotheses**. Requested goal coaching can offer a general wellness action during calibration when a relevant recent record exists; it is explicitly not an anomaly finding. Missing or stale data do not trigger coaching.
+## Method and verification
 
-Every action has evidence, its supported scope, a content version and a review status. Public sources do not imply clinician review. Execution and self-reported outcomes remain separate. Rejection or feeling worse pauses the action; feedback does not prove causality or retrain clinical thresholds. Successful-send budgets, cooldowns, consent rechecks, revocation and duplicate suppression constrain delivery. Ambiguous remote responses require reconciliation.
+Weekly statistics keep missing dates and separate sources/devices/methods. Personal trends use versioned 28/3-day median/MAD engineering hypotheses, with at least 14 baseline days. These parameters have not been clinically validated. CDC, HRV methodology and COM-B sources inform contextual questions and general-wellness actions; they do not validate the software or authorize diagnostic claims.
 
-Default intent clarification is explicitly labeled local keyword guidance, not AI. An optional compatible AI sees only the volunteered request, with per-use opt-in, proposes goals/questions, and awaits user confirmation. It cannot grant consent or set clinical rules. Adapters, intent, advice and transports are replaceable trusted Python plugins; see [contracts](docs/plugins.md).
-
-## Scope and verification
-
-The full suite covers synthetic parsing, consent, calibration, freshness, HTTP onboarding, delivery, feedback and revocation; run:
-
-```bash
+~~~bash
 python -m unittest discover -s tests -v
-```
+healthos report
+healthos watch --once
+healthos plugins
+~~~
 
-The UI journey was also exercised in a browser. Private exports and credentials are excluded from this repository. Store them in `data/private/`; revocation does not erase original files or already delivered copies. There is no application-layer encryption.
-
-This is a local research tool for general wellness, not diagnosis, treatment or emergency monitoring. No clinician has reviewed the exact implementation or validated its health benefit. Apple XML coverage remains narrow and excludes sleep. The 20-model research catalog is not a claim of 20 working connectors. Voice, recordings, productivity alignment, production accounts and a mobile companion are future work. Legacy `monitor` is retained for research compatibility; new journeys use the consent-aware care/outbox flow.
-
-[Evidence ledger](docs/evidence-to-code.md) · [Method](docs/method.md) · [Model inventory](docs/model-capabilities.md) · [Security](SECURITY.md) · [Contributing](CONTRIBUTING.md) · MIT
+See [report methodology](docs/report-methodology.md), [literature](docs/literature.md), [plugin contracts](docs/plugins.md), [security](SECURITY.md) and [validation](docs/validation.md). Tests use synthetic records, mocked network calls and real localhost HTTP. Live vendor accounts, actual hardware accuracy, human expert review and outcomes remain unverified.

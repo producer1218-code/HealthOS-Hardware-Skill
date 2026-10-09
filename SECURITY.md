@@ -1,3 +1,11 @@
+# v0.6 Google/API and report storage
+
+Google API health records and tokens must be encrypted at rest under its [user data policy](https://developers.google.com/health/policies/health-api-developer-user-data-policy). connect-google refuses to start without explicit encrypted-storage confirmation. This is an operator attestation, not verification or application encryption: keep the client JSON, entire private workspace, snapshots, SQLite databases and reports on OS-encrypted storage. Credential file permissions alone are insufficient. Tokens remain in connection/oauth.json for the connector only.
+
+API-derived aggregates are still governed by Google sharing restrictions. Report models are default-off and receive allowlisted aggregates only after explicit sharing; endpoint recipient is shown locally. Custom Python plugins are trusted, not sandboxed. Full agent packets contain private identifiers/context and require separate sharing consent when handed to a cloud agent.
+
+forget-memory removes generated local report history, feedback and volunteered answers, preserving source files, goals, connection credentials and action delivery deduplication. To disconnect Google, revoke the app in Google account connections and remove the private connection separately. External sent copies and exports require separate deletion. This prototype is not an audited hosted service or a medical record security platform.
+
 # Security and sensitive data
 
 The current app is single-user and local. `serve` binds 127.0.0.1 only, validates Host/Origin, requires a per-process token for mutations and does not serve uploaded raw files. Do not proxy it to the internet; no account authentication or multi-user isolation is implemented. Private files are not encrypted by the application.

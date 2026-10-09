@@ -23,6 +23,8 @@ BUILTIN_ADAPTERS = (
     "whoop-v2-json",
     "jsonl",
     "google-health-rhr-json",
+    "google-health-json",
+    "google-health-api",
 )
 
 
@@ -34,11 +36,12 @@ def builtin_adapters() -> dict:
     from .whoop_json import WhoopV2JSON
     from .google_health_rhr import GoogleHealthRestingHeartRate
     from .fitbit_takeout import FitbitTakeout
+    from healthos.google_health import GoogleHealthAPI, GoogleHealthSnapshot
 
     return {"csv": CanonicalCSV, "apple-health-xml": AppleHealthExport,
             "whoop-v2-json": WhoopV2JSON, "jsonl": JsonlAdapter,
             "google-health-rhr-json": GoogleHealthRestingHeartRate,
-            "fitbit-takeout": FitbitTakeout}
+            "fitbit-takeout": FitbitTakeout, "google-health-json": GoogleHealthSnapshot, "google-health-api": GoogleHealthAPI}
 
 
 def get_adapter(name: str) -> Adapter:

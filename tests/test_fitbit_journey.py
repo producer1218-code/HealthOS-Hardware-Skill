@@ -251,6 +251,20 @@ class LocalServerTests(unittest.TestCase):
         self.assertTrue(remaining["streams"])
         self.assertEqual(self.post("/api/revoke", {})["streams"], [])
 
+    def test_periodic_report_configuration_memory_and_revocation_over_http(self):
+        self.post("/api/report-settings", {"enabled": True, "interval_days": 7, "share_aggregates": False})
+        day = (datetime.now(timezone.utc).date() - timedelta(days=1)).isoformat()
+        upload = self.post("/api/upload", json.dumps([sleep_record(day=day)]).encode(), {"X-Filename": "sleep-synthetic.json"}, raw=True)
+        output = self.post("/api/setup", {"confirmed": True, "user_id": "synthetic-user", "request": "sleep", "goals": ["sleep"],
+                           "adapter": "fitbit-takeout", "file_id": upload["file_id"], "metrics": ["sleep_minutes"], "local_analysis": True, "notifications": True})
+        self.assertEqual(output["periodic_report"]["status"], "sent")
+        self.assertEqual(output["periodic_report"]["latest"]["metrics"][0]["missing_days"], 6)
+        self.assertTrue((self.root / "memory.json").exists())
+        self.assertEqual(self.post("/api/run", {})["periodic_report"]["status"], "waiting_for_next_period")
+        self.assertTrue(self.post("/api/forget-memory", {})["saved"])
+        self.assertFalse((self.root / "memory.json").exists())
+        self.assertEqual(self.post("/api/revoke", {})["periodic_report"]["status"], "disabled_or_not_authorized")
+
     def test_setup_requires_confirmation_and_no_grants_are_inferred(self):
         with self.assertRaises(HTTPError):
             self.post("/api/setup", {"confirmed": False})

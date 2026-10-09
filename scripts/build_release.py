@@ -33,7 +33,7 @@ def public_files():
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--output", type=Path, default=ROOT.parent / "healthos-open-v0.5.0-dev.zip")
+    parser.add_argument("--output", type=Path, default=ROOT.parent / "healthos-open-v0.6.0-dev.zip")
     args = parser.parse_args()
     files = list(public_files())
     if not files:

@@ -32,6 +32,30 @@ def post(path: str, body: dict, token: str | None = None) -> dict:
 class FeishuDelivery:
     external = True
 
+    def send_report(self, report: dict, settings: dict) -> str:
+        if settings.get("recipient_user_id") != report["user_id"]:
+            raise ValueError("recipient binding mismatch")
+        receive_type = settings.get("receive_id_type", "open_id")
+        if receive_type not in {"open_id", "user_id"} or not settings.get("receive_id"):
+            raise ValueError("Feishu requires a specific consenting user")
+        auth = post("auth/v3/tenant_access_token/internal", {
+            "app_id": os.environ[settings.get("app_id_env", "HEALTHOS_FEISHU_APP_ID")],
+            "app_secret": os.environ[settings.get("app_secret_env", "HEALTHOS_FEISHU_APP_SECRET")]})
+        # Free-text history stays local; send only the bounded report observation/actions.
+        text = report["markdown"].split("## 我目前了解的你", 1)[0] + "\n完整证据、个人记忆与反馈入口见你本机 HealthOS 报告。"
+        try:
+            result = post("im/v1/messages?receive_id_type=" + receive_type,
+                          {"receive_id": settings["receive_id"], "msg_type": "text", "uuid": report["id"][:32],
+                           "content": json.dumps({"text": text[:12000]}, ensure_ascii=False)}, auth["tenant_access_token"])
+        except RuntimeError:
+            raise
+        except Exception:
+            raise DeliveryUncertain("report may have been accepted; reconcile before retry") from None
+        receipt = result.get("data", {}).get("message_id")
+        if not receipt:
+            raise DeliveryUncertain("report acknowledgement missing")
+        return receipt
+
     def send(self, notice: dict, settings: dict) -> str:
         if settings.get("recipient_user_id") != notice["user_id"]:
             raise ValueError("recipient binding mismatch")

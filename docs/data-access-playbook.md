@@ -14,7 +14,7 @@ repository.
 | Tier | Route | Vendor approval | What you actually receive | May ship in this repo |
 | --- | --- | --- | --- | --- |
 | A | User-initiated local export | None | Files the user downloads and hands you | Yes — adapter only |
-| B | User-authorized OAuth API | App review, sometimes per-scope | Vendor-normalized records, rate-limited | Adapter that reads a saved response |
+| B | User-authorized OAuth API | App review, sometimes per-scope | Vendor-normalized records, rate-limited | Eligible-project connector or saved-response adapter |
 | C | Enterprise / partner API | Contract, fee, sometimes device procurement | All-day metrics, often higher resolution | No |
 | D | Device-level BLE / SDK | Vendor SDK licence | Raw or high-frequency signals, device-dependent | No |
 

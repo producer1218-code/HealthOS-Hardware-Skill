@@ -1,3 +1,7 @@
+# v0.6: choose export or eligible Google OAuth
+
+This page covers the official export reader. For automatic Google Health access, use [google-health-connect.md](google-health-connect.md). The live reader is experimental and narrower than exports: daily RHR, daily-average RMSSD and processed main-sleep duration. Enable periodic reports and optional model commentary through [the user entry](../README.zh-CN.md). Neither route implies real Fitbit Air field validation.
+
 # 用已有 Fitbit 开始
 
 目标是让拥有 Fitbit 的普通用户通过自己下载的数据建立行动计划。无需 API 密钥或开发者申请。导出权限与可读取格式分别核对；不是任意 Fitbit 文件解析器。

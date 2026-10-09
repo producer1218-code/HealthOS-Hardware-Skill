@@ -13,6 +13,13 @@ from healthos.planning import GOAL_METRICS
 
 
 PATHS = {
+    "google-health-api": ({"resting_heart_rate_bpm", "hrv_rmssd_ms", "sleep_minutes"},
+                         ["Google Health API 当前暂停新项目接入；先查看 docs/google-health-connect.md 判断项目是否获准。",
+                          "已有权限：安装 google 可选依赖，运行 healthos connect-google，使用浏览器逐项授权。",
+                          "选择本机 connection 目录。后台只同步本地再次授权的指标；撤回后不再请求 API。",
+                          "连接器属于实验实现，未完成真实 Fitbit Air 账号验证；暂不自动读取步数、血氧或皮温。"]),
+    "google-health-json": ({"resting_heart_rate_bpm", "hrv_rmssd_ms", "sleep_minutes"},
+                          ["选择合法保存的 Google Health v4 dataPoints JSON，支持 Fitbit RHR、日 RMSSD 和已处理主睡眠。"]),
     "fitbit-takeout": ({"resting_heart_rate_bpm", "hrv_rmssd_ms", "sleep_minutes", "steps_count"},
                        ["Google 账号：打开 https://takeout.google.com，选择 Google Health，申请导出并下载 ZIP。",
                         "原 Fitbit 登录：账号设置 → Data Export → Request Data，确认邮件后下载归档。",

@@ -1,3 +1,11 @@
+# v0.6 periodic-report plugin contracts
+
+Report models use module:Class with render(aggregate_packet, settings), returning only summary: string and questions: list[str]. Explicit share_aggregates=true is required, including for custom plugins; the bundled path strips IDs, raw records and free-text context. Plugins are trusted Python and can violate this contract, so review them. Configure via healthos configure-reports; examples/report_settings_llm.json shows the compatible interface.
+
+Report transports implement external: bool and send_report(report, settings) with a nonempty acknowledgement. Unknown remote outcomes throw DeliveryUncertain. Report permission rechecks cover every included metric; the separate ledger deduplicates same-day reports. No real external service was invoked by the synthetic demo.
+
+See [agent handoff](agent-handoff.md) and [methodology](report-methodology.md). Existing contracts below remain available for actions and legacy notices.
+
 # 可插拔接口
 
 四个边界分别替换，均为可信 Python 插件；不是隔离沙箱。高级配置应放 `data/private/`。内置 UI 提供已声明入口，高级档案支持自定义模块与多来源。

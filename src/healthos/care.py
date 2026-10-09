@@ -189,8 +189,10 @@ def care_once(profile: dict, base_dir: Path, as_of: date, now: datetime,
                                "advice": advice, "feedback_options": ["executed", "skipped", "not_relevant"],
                                "outcome_options": ["felt_better", "unchanged", "felt_worse"], "clinical_status": "general_wellness"})
     plan["runtime_goals"] = runtime_goals
+    from healthos.reports import period_summary
     plan["replan_reasons"] = {"permission_checked_at": now.isoformat(), "data_checked_as_of": as_of.isoformat(),
                               "feedback_count": len(feedback), "suppressed_actions": suppressed}
     return {"version": "care-v2", "user_id": profile["user_id"], "as_of": as_of.isoformat(),
             "plan": plan, "source_status": sources, "streams": streams,
-            "report": report, "candidates": candidates, "delivery": "enqueue_separately"}
+            "report": report, "period_summary": period_summary(observations, as_of),
+            "candidates": candidates, "delivery": "enqueue_separately"}

@@ -1,0 +1,11 @@
+{
+  "enabled": true,
+  "interval_days": 7,
+  "llm": {
+    "provider": "openai_compatible",
+    "endpoint": "https://your-provider.example/v1/chat/completions",
+    "model": "your-model-name",
+    "api_key_env": "HEALTHOS_LLM_API_KEY",
+    "share_aggregates": false
+  }
+}

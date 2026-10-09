@@ -71,6 +71,10 @@ def cycle(profile: dict, workspace: Path, now: datetime | None = None, delivery:
         # This is the one output consumers should render, independent of transport.
         output["recommendations"] = output["candidates"]
         output["data_status"] = "source_error" if any(s["status"] == "source_error" for s in output["source_status"]) else "available" if output["streams"] else "waiting_for_data"
+        from healthos.reports import report_tick
+        settings_path = workspace / "report-settings.json"
+        report_settings = json.loads(settings_path.read_text(encoding="utf-8")) if settings_path.exists() else {}
+        output["periodic_report"] = report_tick(profile, output, workspace, now, box, report_settings, delivery, allow_external)
         write_json(workspace / "latest.json", output)
         return output
     finally:
@@ -79,6 +83,9 @@ def cycle(profile: dict, workspace: Path, now: datetime | None = None, delivery:
 
 def readable_summary(output: dict) -> str:
     lines = ["你的健康计划"]
+    periodic = output.get("periodic_report", {})
+    if periodic.get("latest"):
+        lines.append("定期报告：" + periodic["latest"]["title"] + "；状态 " + periodic["status"])
     for goal in output["plan"]["runtime_goals"]:
         lines.append(f"• {GOAL_LABELS[goal['goal']]}：{STATUS_LABELS[goal['status']]}")
     for source in output["source_status"]:
@@ -121,8 +128,8 @@ def guided_start(workspace: Path, settings: dict | None = None, allow_cloud: boo
             break
         except (KeyError, ValueError):
             tell("时区无法识别，请使用 Asia/Shanghai 等 IANA 时区名称。")
-    adapters = ["fitbit-takeout", "apple-health-xml", "jsonl", "csv"]
-    tell("1 Fitbit/Google Health 官方导出 / 2 Apple 健康导出 / 3 已映射的 JSONL / 4 已映射的 CSV")
+    adapters = ["fitbit-takeout", "apple-health-xml", "jsonl", "csv", "google-health-api"]
+    tell("1 Fitbit/Google Health 官方导出 / 2 Apple 健康导出 / 3 已映射的 JSONL / 4 已映射的 CSV / 5 已授权 Google Health API 目录")
     adapter = choose("选择已有设备数据入口：", adapters)[0]
     for step in PATHS[adapter][1]:
         tell(step)

@@ -67,9 +67,16 @@ def make_server(workspace: Path, port: int = 8765, intent_settings: dict | None 
             elif self.path == "/api/options":
                 self.respond({"goals": GOAL_LABELS, "questions": QUESTIONS, "metrics": METRIC_LABELS, "statuses": STATUS_LABELS,
                               "sources": [{"id": a, "metrics": sorted(PATHS[a][0]), "steps": PATHS[a][1]} for a in
-                                          ["fitbit-takeout", "apple-health-xml", "jsonl", "csv"]],
+                                          ["fitbit-takeout", "google-health-api", "google-health-json", "apple-health-xml", "jsonl", "csv"]],
                               "ai_configured": bool(intent_settings and intent_settings.get("provider") != "local"),
                               "external_configured": bool(delivery_settings and allow_external)})
+            elif self.path == "/api/report-settings":
+                path = workspace / "report-settings.json"
+                settings = json.loads(path.read_text(encoding="utf-8")) if path.exists() else {}
+                self.respond({"enabled": settings.get("enabled", False), "interval_days": settings.get("interval_days", 7),
+                              "model_configured": settings.get("llm", {}).get("provider", "none") != "none",
+                              "model_recipient": urlparse(settings.get("llm", {}).get("endpoint", "")).hostname or settings.get("llm", {}).get("provider", "none"),
+                              "share_aggregates": settings.get("llm", {}).get("share_aggregates", False)})
             elif self.path == "/api/latest":
                 path = workspace / "latest.json"
                 result = json.loads(path.read_text(encoding="utf-8")) if path.exists() else {"empty": True}
@@ -136,6 +143,23 @@ def make_server(workspace: Path, port: int = 8765, intent_settings: dict | None 
                         profile["preferences"]["shift_work"] = body.get("shift_work") is True
                         write_json(workspace / "profile.json", profile)
                         self.respond(run_saved(workspace, delivery_settings, allow_external))
+                    elif self.path == "/api/report-settings":
+                        interval = body.get("interval_days", 7)
+                        if isinstance(interval, bool) or not isinstance(interval, int) or not 1 <= interval <= 30:
+                            raise ValueError("报告周期需为 1–30 天。")
+                        if not isinstance(body.get("enabled", False), bool) or not isinstance(body.get("share_aggregates", False), bool):
+                            raise ValueError("请明确选择报告和模型授权。")
+                        path = workspace / "report-settings.json"
+                        settings = json.loads(path.read_text(encoding="utf-8")) if path.exists() else {}
+                        settings.update(enabled=body.get("enabled", False), interval_days=interval)
+                        settings.setdefault("llm", {"provider": "none"})["share_aggregates"] = body.get("share_aggregates", False)
+                        write_json(path, settings)
+                        self.respond({"saved": True, "message": "报告周期已保存；实际生成仍取决于指标和通知授权。"})
+                    elif self.path == "/api/forget-memory":
+                        from healthos.reports import forget_memory
+                        profile = json.loads((workspace / "profile.json").read_text(encoding="utf-8"))
+                        forget_memory(profile, workspace)
+                        self.respond({"saved": True, "message": "本地报告历史、背景回答与反馈已清除。目标和原始导出保留；外部副本需自行删除。"})
                     elif self.path == "/api/run":
                         if not (workspace / "profile.json").exists():
                             raise ValueError("请先完成目标和授权。")
