@@ -5,14 +5,14 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "healthos-open"
 version = "0.6.0.dev0"
-description = "Goal-driven, consent-aware wellness planning with pluggable wearable data and delivery"
+description = "HealthOS Skill: personal health agent workflows, wearable data and evidence-linked periodic wellness reports"
 readme = "README.md"
 requires-python = ">=3.10"
 dependencies = ["tzdata>=2024.1; sys_platform == 'win32'"]
 license = {file = "LICENSE"}
 authors = [{name = "Ren Zheng (任正)", email = "1626952981@qq.com"}]
 keywords = [
-  "wearables", "health-data", "fitbit", "local-first", "privacy",
+  "agent-skills", "health-agent", "bring-your-own-llm", "wearables", "health-data", "fitbit", "local-first", "privacy",
   "quantified-self", "personal-health-record", "consent", "digital-health",
   "hrv", "sleep", "resting-heart-rate", "self-hosted",
 ]
@@ -32,6 +32,7 @@ Releases = "https://github.com/producer1218-code/healthos-open/releases"
 
 [project.optional-dependencies]
 google = ["google-auth>=2.29,<3", "google-auth-oauthlib>=1.2,<2", "requests>=2.31,<3"]
+dev = ["PyYAML>=6,<7", "jsonschema>=4,<5"]
 
 [project.scripts]
 healthos = "healthos.cli:main"

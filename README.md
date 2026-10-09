@@ -1,4 +1,4 @@
-# HealthOS Open
+# HealthOS Skill — personal health agents for wearable data
 
 [![tests](https://github.com/producer1218-code/healthos-open/actions/workflows/tests.yml/badge.svg)](https://github.com/producer1218-code/healthos-open/actions/workflows/tests.yml)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
@@ -6,6 +6,10 @@
 **Understand the wearable you already own. Connect permitted records to your own agent, receive evidence-linked reports, and refine a personal plan through feedback.**
 
 **第一次来？[中文入口](README.zh-CN.md) → [新用户指引](docs/start-here.md) → [直接查看完整报告](docs/sample-health-report.md)。阅读无需安装、登录或密钥。**
+
+**An open-source Agent Skill and companion Python runtime for permitted wearable data, bring-your-own LLM, evidence-linked periodic wellness reports and inspectable memory.** Formerly HealthOS Open; repository and package remain healthos-open.
+
+[Installable SKILL.md](skills/healthos/SKILL.md) · [Skill integration](docs/healthos-skill.md) · [FAQ](docs/faq.md) · [Machine-readable capabilities](healthos-skill.json)
 
 ## Explore without installing anything
 

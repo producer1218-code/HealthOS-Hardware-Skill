@@ -1,0 +1,158 @@
+{
+  "manifest_version": "healthos-skill-v1",
+  "name": "HealthOS Skill",
+  "skill_name": "healthos",
+  "aliases": [
+    "HealthOS Open",
+    "healthos-open"
+  ],
+  "version": "0.6.0.dev0",
+  "reviewed_date": "2026-10-09",
+  "canonical_repository": "https://github.com/producer1218-code/healthos-open",
+  "license": "MIT",
+  "summary": "Guided wearable-to-agent data access, evidence-linked periodic wellness reports, BYO LLM and inspectable user memory.",
+  "entrypoints": {
+    "skill": "skills/healthos/SKILL.md",
+    "user": "docs/start-here.md",
+    "methods": "docs/report-methodology.md",
+    "faq": "docs/faq.md",
+    "deployment": "docs/install.md",
+    "schema": "schemas/agent-context-v1.schema.json",
+    "synthetic_input": "examples/agent_packet.synthetic.json",
+    "synthetic_output": "examples/wellness_report.synthetic.json"
+  },
+  "data_adapters": [
+    {
+      "id": "google-health-api",
+      "metrics": [
+        "hrv_rmssd_ms",
+        "resting_heart_rate_bpm",
+        "sleep_minutes"
+      ],
+      "conditions": "Experimental, eligible Google projects only; Fitbit origin; encrypted storage attestation; no real-account verification."
+    },
+    {
+      "id": "google-health-json",
+      "metrics": [
+        "hrv_rmssd_ms",
+        "resting_heart_rate_bpm",
+        "sleep_minutes"
+      ],
+      "conditions": "Authorized saved Google v4 dataPoints; Fitbit origin and processed main sleep only."
+    },
+    {
+      "id": "fitbit-takeout",
+      "metrics": [
+        "hrv_rmssd_ms",
+        "resting_heart_rate_bpm",
+        "sleep_minutes",
+        "steps_count"
+      ],
+      "conditions": "Observed official export subsets; manual refresh; not every device/export version verified."
+    },
+    {
+      "id": "jsonl",
+      "metrics": [
+        "heart_rate_bpm",
+        "hrv_rmssd_ms",
+        "hrv_sdnn_ms",
+        "respiratory_rate_bpm",
+        "resting_heart_rate_bpm",
+        "self_report_energy_0_10",
+        "skin_temp_c",
+        "sleep_minutes",
+        "spo2_pct",
+        "steps_count"
+      ],
+      "conditions": "Canonical records; no device compatibility implied."
+    },
+    {
+      "id": "csv",
+      "metrics": [
+        "heart_rate_bpm",
+        "hrv_rmssd_ms",
+        "hrv_sdnn_ms",
+        "respiratory_rate_bpm",
+        "resting_heart_rate_bpm",
+        "self_report_energy_0_10",
+        "skin_temp_c",
+        "sleep_minutes",
+        "spo2_pct",
+        "steps_count"
+      ],
+      "conditions": "Operator-mapped canonical fields; no device compatibility implied."
+    },
+    {
+      "id": "apple-health-xml",
+      "metrics": [
+        "heart_rate_bpm",
+        "hrv_sdnn_ms",
+        "resting_heart_rate_bpm",
+        "skin_temp_c",
+        "spo2_pct"
+      ],
+      "conditions": "Partial export reader; no sleep duration or steps; SDNN is not RMSSD."
+    },
+    {
+      "id": "whoop-v2-json",
+      "metrics": [
+        "hrv_rmssd_ms",
+        "respiratory_rate_bpm",
+        "resting_heart_rate_bpm",
+        "skin_temp_c",
+        "sleep_minutes",
+        "spo2_pct"
+      ],
+      "conditions": "Already authorized saved responses; no online WHOOP OAuth."
+    },
+    {
+      "id": "google-health-rhr-json",
+      "metrics": [
+        "resting_heart_rate_bpm"
+      ],
+      "conditions": "Legacy saved Fitbit-origin RHR subset; calculation methods stay separate."
+    }
+  ],
+  "unsupported_dedicated_adapters": [
+    "Huawei",
+    "Xiaomi",
+    "Amazfit/Zepp",
+    "OPPO",
+    "vivo"
+  ],
+  "report": {
+    "input_version": "agent-context-v1",
+    "output_version": "wellness-report-v1",
+    "summary_window_completed_days": 7,
+    "ui_delivery_cadence_days": [
+      7,
+      14,
+      30
+    ],
+    "execution": "Requires an operator-run process; the skill is not a scheduler."
+  },
+  "llm": {
+    "required": false,
+    "bundled_interface": "Chat Completions JSON",
+    "plugin_interface": "render(aggregate_packet, settings)",
+    "external_share_default": false,
+    "cloud_input_version": "report-aggregate-v1",
+    "credentials": "Operator environment variable, never a public file."
+  },
+  "interfaces": [
+    "CLI",
+    "trusted Python plugins",
+    "local report JSON",
+    "Agent Skills instructions"
+  ],
+  "mcp_server": false,
+  "pages_live_verified": false,
+  "clinical_validation": false,
+  "validation_limits": [
+    "Synthetic tests and mocked APIs",
+    "No real Fitbit Air account verification",
+    "No cross-host skill behavioral verification",
+    "No clinician sign-off or clinical benefit study"
+  ],
+  "privacy": "Full local packets may contain identifiers and user context; external sharing requires separate consent."
+}

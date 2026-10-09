@@ -2,7 +2,7 @@ name: Public demo
 on:
   push:
     branches: [main]
-    paths: ['site/**', '.github/workflows/public-demo.yml']
+    paths: ['site/**', 'healthos-skill.json', 'llms.txt', 'scripts/build_public_site.py', '.github/workflows/public-demo.yml']
   workflow_dispatch:
 permissions:
   contents: read
@@ -21,9 +21,6 @@ jobs:
           test -f site/index.html
           test -f site/.nojekyll
           test "$(find site -type f | wc -l)" -eq 2
-      - uses: actions/upload-pages-artifact@v3
-        with:
-          path: site
       - name: Check Pages availability
         id: pages
         env:
@@ -32,6 +29,7 @@ jobs:
           code=$(curl -sS -o "$RUNNER_TEMP/pages.json" -w '%{http_code}' -H "Authorization: Bearer $GH_TOKEN" -H "Accept: application/vnd.github+json" "https://api.github.com/repos/$GITHUB_REPOSITORY/pages")
           if [ "$code" = 200 ]; then
             echo 'enabled=true' >> "$GITHUB_OUTPUT"
+            echo "site_url=$(jq -r '.html_url' "$RUNNER_TEMP/pages.json")" >> "$GITHUB_OUTPUT"
           elif [ "$code" = 404 ]; then
             echo 'enabled=false' >> "$GITHUB_OUTPUT"
             echo 'Public files are ready. Enable Settings → Pages → GitHub Actions, then run this workflow. GitHub-readable reports remain available.' >> "$GITHUB_STEP_SUMMARY"
@@ -39,6 +37,18 @@ jobs:
             echo "Pages status check failed: HTTP $code" >&2
             exit 1
           fi
+      - name: Build public site metadata
+        env:
+          PAGES_URL: ${{ steps.pages.outputs.site_url }}
+        run: |
+          if [ -n "$PAGES_URL" ]; then
+            python scripts/build_public_site.py --output demo-output/public-site --base-url "$PAGES_URL"
+          else
+            python scripts/build_public_site.py --output demo-output/public-site
+          fi
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: demo-output/public-site
   deploy:
     if: needs.prepare.outputs.enabled == 'true'
     needs: prepare

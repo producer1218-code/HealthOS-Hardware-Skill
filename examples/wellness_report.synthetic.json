@@ -1,0 +1,302 @@
+{
+  "schema_version": "wellness-report-v1",
+  "user_id": "demo-user",
+  "as_of": "2026-07-31",
+  "created_at": "2026-08-01T08:00:00+00:00",
+  "period": [
+    "2026-07-25",
+    "2026-07-31"
+  ],
+  "title": "你的定期健康观察报告",
+  "review_status": "evidence_linked_not_clinician_reviewed",
+  "goal_states": [
+    {
+      "goal": "sleep",
+      "status": "monitoring",
+      "usable_metrics": [
+        "sleep_minutes"
+      ],
+      "missing_or_unusable_metrics": [],
+      "latest_streams": [
+        {
+          "source": "synthetic::synthetic-demo",
+          "device_id": "demo-device",
+          "metric": "sleep_minutes",
+          "latest_record_date": "2026-07-31",
+          "first_record_date": "2026-07-01",
+          "valid_record_days": 31,
+          "stale_days": 0
+        }
+      ]
+    },
+    {
+      "goal": "recovery",
+      "status": "monitoring",
+      "usable_metrics": [
+        "hrv_rmssd_ms",
+        "resting_heart_rate_bpm"
+      ],
+      "missing_or_unusable_metrics": [
+        "hrv_sdnn_ms"
+      ],
+      "latest_streams": [
+        {
+          "source": "synthetic::synthetic-demo",
+          "device_id": "demo-device",
+          "metric": "hrv_rmssd_ms",
+          "latest_record_date": "2026-07-31",
+          "first_record_date": "2026-07-01",
+          "valid_record_days": 31,
+          "stale_days": 0
+        },
+        {
+          "source": "synthetic::synthetic-demo",
+          "device_id": "demo-device",
+          "metric": "resting_heart_rate_bpm",
+          "latest_record_date": "2026-07-31",
+          "first_record_date": "2026-07-01",
+          "valid_record_days": 31,
+          "stale_days": 0
+        }
+      ]
+    }
+  ],
+  "metrics": [
+    {
+      "source": "synthetic::synthetic-demo",
+      "device_id": "demo-device",
+      "metric": "hrv_rmssd_ms",
+      "unit": "ms",
+      "valid_days": 7,
+      "missing_days": 0,
+      "median": 42.0,
+      "previous_valid_days": 7,
+      "previous_median": 43.0,
+      "comparison_status": "descriptive_only"
+    },
+    {
+      "source": "synthetic::synthetic-demo",
+      "device_id": "demo-device",
+      "metric": "resting_heart_rate_bpm",
+      "unit": "bpm",
+      "valid_days": 7,
+      "missing_days": 0,
+      "median": 59.0,
+      "previous_valid_days": 7,
+      "previous_median": 58.0,
+      "comparison_status": "descriptive_only"
+    },
+    {
+      "source": "synthetic::synthetic-demo",
+      "device_id": "demo-device",
+      "metric": "sleep_minutes",
+      "unit": "min",
+      "valid_days": 7,
+      "missing_days": 0,
+      "median": 445.0,
+      "previous_valid_days": 7,
+      "previous_median": 450.0,
+      "comparison_status": "descriptive_only"
+    }
+  ],
+  "personal_trends": [
+    {
+      "user_id": "demo-user",
+      "source": "synthetic::synthetic-demo",
+      "device_id": "demo-device",
+      "metric": "hrv_rmssd_ms",
+      "unit": "ms",
+      "rule_version": "baseline-v0.1-research",
+      "baseline_n_days": 28,
+      "recent_n_days": 3,
+      "baseline_window": [
+        "2026-07-01",
+        "2026-07-28"
+      ],
+      "recent_window": [
+        "2026-07-29",
+        "2026-07-31"
+      ],
+      "baseline_median": 43.0,
+      "recent_median": 32.0,
+      "delta": -11.0,
+      "robust_scale": 5.0,
+      "directed_z": 2.2,
+      "direction": "lower",
+      "status": "within_rule_limits",
+      "reason": "research rule did not trigger"
+    },
+    {
+      "user_id": "demo-user",
+      "source": "synthetic::synthetic-demo",
+      "device_id": "demo-device",
+      "metric": "resting_heart_rate_bpm",
+      "unit": "bpm",
+      "rule_version": "baseline-v0.1-research",
+      "baseline_n_days": 28,
+      "recent_n_days": 3,
+      "baseline_window": [
+        "2026-07-01",
+        "2026-07-28"
+      ],
+      "recent_window": [
+        "2026-07-29",
+        "2026-07-31"
+      ],
+      "baseline_median": 58.0,
+      "recent_median": 68.0,
+      "delta": 10.0,
+      "robust_scale": 2.5,
+      "directed_z": 4.0,
+      "direction": "higher",
+      "status": "notable_change",
+      "reason": "persistent change relative to this device's personal baseline; not a diagnosis"
+    },
+    {
+      "user_id": "demo-user",
+      "source": "synthetic::synthetic-demo",
+      "device_id": "demo-device",
+      "metric": "sleep_minutes",
+      "unit": "min",
+      "rule_version": "baseline-v0.1-research",
+      "baseline_n_days": 28,
+      "recent_n_days": 3,
+      "baseline_window": [
+        "2026-07-01",
+        "2026-07-28"
+      ],
+      "recent_window": [
+        "2026-07-29",
+        "2026-07-31"
+      ],
+      "baseline_median": 450.0,
+      "recent_median": 360.0,
+      "delta": -90.0,
+      "robust_scale": 25.0,
+      "directed_z": 3.6,
+      "direction": "lower",
+      "status": "notable_change",
+      "reason": "persistent change relative to this device's personal baseline; not a diagnosis"
+    }
+  ],
+  "memory": {
+    "version": "personal-memory-v1",
+    "confirmed_goals": [
+      "sleep",
+      "recovery"
+    ],
+    "user_stated_concern": "Synthetic only: understand wearable sleep and recovery records.",
+    "user_stated_context": {
+      "sleep": "Synthetic context: occasional late work; prefer a small action."
+    },
+    "confirmed_shift_work": false,
+    "feedback_counts": {},
+    "paused_actions": [],
+    "measurement_history": [
+      {
+        "source": "synthetic::synthetic-demo",
+        "device_id": "demo-device",
+        "metric": "hrv_rmssd_ms",
+        "latest_record_date": "2026-07-31",
+        "first_record_date": "2026-07-01",
+        "valid_record_days": 31,
+        "stale_days": 0
+      },
+      {
+        "source": "synthetic::synthetic-demo",
+        "device_id": "demo-device",
+        "metric": "resting_heart_rate_bpm",
+        "latest_record_date": "2026-07-31",
+        "first_record_date": "2026-07-01",
+        "valid_record_days": 31,
+        "stale_days": 0
+      },
+      {
+        "source": "synthetic::synthetic-demo",
+        "device_id": "demo-device",
+        "metric": "sleep_minutes",
+        "latest_record_date": "2026-07-31",
+        "first_record_date": "2026-07-01",
+        "valid_record_days": 31,
+        "stale_days": 0
+      }
+    ],
+    "learning_boundary": "反馈用于行动适用性；感受变化不证明因果，不训练疾病预测或自动调整医学阈值。"
+  },
+  "next_actions": [
+    {
+      "goal": "sleep",
+      "basis": "user_requested_goal_not_diagnosis",
+      "advice": {
+        "action_id": "sleep-routine-v1",
+        "action": "今晚选一个可行的睡前收尾时间，睡前半小时放下电子设备；明早记录感受。",
+        "question": "最近的工作、照护、旅行或佩戴条件是否改变？这个动作适合你今晚的安排吗？",
+        "evidence": [
+          {
+            "title": "CDC About Sleep",
+            "url": "https://www.cdc.gov/sleep/about/index.html",
+            "supports": "一般睡眠习惯与睡眠日记；不支持此系统的触发阈值。"
+          }
+        ],
+        "success_check": "记录是否实际执行、可行性与次日自述感受；不将一次变化归因为建议。",
+        "scope": "general_wellness",
+        "content_version": "guideline-advice-v1",
+        "review_status": "primary_source_based_not_clinician_reviewed"
+      }
+    },
+    {
+      "goal": "recovery",
+      "basis": "user_requested_goal_not_diagnosis",
+      "advice": {
+        "action_id": "measurement-context-v1",
+        "action": "先核对佩戴和记录条件，写下最近训练、旅行或作息是否改变；暂不判断原因。",
+        "question": "这段记录能代表平时的你吗？你愿意补充哪些背景？",
+        "evidence": [
+          {
+            "title": "HealthOS evidence-to-code ledger",
+            "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5316555/",
+            "supports": "HRV 测量及情境解释原则；不支持诊断或此系统的精确阈值。"
+          }
+        ],
+        "success_check": "背景是否补齐，记录条件是否可信；不自动改变医学判断。",
+        "scope": "general_wellness",
+        "content_version": "guideline-advice-v1",
+        "review_status": "primary_source_based_not_clinician_reviewed"
+      }
+    }
+  ],
+  "methodology": {
+    "version": "wellness-report-v1",
+    "evidence": [
+      {
+        "title": "CDC sleep guidance",
+        "url": "https://www.cdc.gov/sleep/about/index.html",
+        "supports": "睡眠习惯和日记；不验证设备或趋势阈值。"
+      },
+      {
+        "title": "HRV measurement recommendations",
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5316555/",
+        "supports": "解释 HRV 时需考虑测量条件；不能直接推断压力或疾病。"
+      },
+      {
+        "title": "COM-B / Behaviour Change Wheel",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/21513547/",
+        "supports": "行动前询问能力、机会和意愿；本项目实施效果尚未验证。"
+      }
+    ],
+    "rule_validation": "28/3-day median/MAD parameters are unvalidated engineering hypotheses"
+  },
+  "next_questions": [
+    "这周哪些工作、照护、旅行或佩戴条件改变了？",
+    "下周这个行动对你的能力、时间机会和意愿是否合适？"
+  ],
+  "limitations": [
+    "有效记录缺失时不填零；不同设备、来源和算法分别比较。",
+    "手环估计不是临床检查；无触发不表示健康达标。",
+    "基线规则尚未临床验证，执行和感受不构成因果证据。"
+  ],
+  "ai_commentary": null,
+  "ai_status": "disabled",
+  "id": "2502898cd80dc327096680cf62a87a2309967ecb06c977a49c849c02f9a6a7ce",
+  "markdown": "# 你的定期健康观察报告\n\n观察周期：2026-07-25 至 2026-07-31\n\n依据公开指南与研究整理；尚未经过临床专家审核。\n\n## 你的目标与数据可信度\n\n- 睡眠：可以监控个人趋势\n- 恢复与身体状态：可以监控个人趋势\n\n| 指标 / 独立数据流 | 本周有效天数 | 本周中位数 | 上周中位数 / 天数 |\n| --- | --- | --- | --- |\n| 睡眠 HRV（RMSSD） / synthetic::synthetic-demo / demo-device | 7/7 | 42.0 ms | 43.0 ms / 7 |\n| 静息心率 / synthetic::synthetic-demo / demo-device | 7/7 | 59.0 bpm | 58.0 bpm / 7 |\n| 睡眠时长 / synthetic::synthetic-demo / demo-device | 7/7 | 445.0 min | 450.0 min / 7 |\n\n## 相对你自己的变化\n\n- 睡眠 HRV（RMSSD）（synthetic::synthetic-demo / demo-device）：未触发该研究规则；基线 28 天，最近 3 天。 最近中位数 32.0，基线 43.0 ms。\n- 静息心率（synthetic::synthetic-demo / demo-device）：个人记录有变化，需要核对背景；基线 28 天，最近 3 天。 最近中位数 68.0，基线 58.0 bpm。\n- 睡眠时长（synthetic::synthetic-demo / demo-device）：个人记录有变化，需要核对背景；基线 28 天，最近 3 天。 最近中位数 360.0，基线 450.0 min。\n\n这些状态描述个人记录变化，不能判断病因；正常或没有触发也不能排除疾病。\n\n## 下周可以尝试\n\n- 今晚选一个可行的睡前收尾时间，睡前半小时放下电子设备；明早记录感受。\n  复盘：记录是否实际执行、可行性与次日自述感受；不将一次变化归因为建议。\n  依据：https://www.cdc.gov/sleep/about/index.html\n- 先核对佩戴和记录条件，写下最近训练、旅行或作息是否改变；暂不判断原因。\n  复盘：背景是否补齐，记录条件是否可信；不自动改变医学判断。\n  依据：https://pmc.ncbi.nlm.nih.gov/articles/PMC5316555/\n\n## 我目前了解的你\n\n你确认的目标：睡眠、恢复与身体状态\n你主动描述的背景（原样记录，不作诊断）：{\"sleep\": \"Synthetic context: occasional late work; prefer a small action.\"}\n已记录反馈：{}\n已暂停不适合或感觉更差的行动：暂无\n\n## 下次需要确认\n\n- 这周哪些工作、照护、旅行或佩戴条件改变了？\n- 下周这个行动对你的能力、时间机会和意愿是否合适？\n\n## 方法与证据边界\n\n- [CDC sleep guidance](https://www.cdc.gov/sleep/about/index.html)：睡眠习惯和日记；不验证设备或趋势阈值。\n- [HRV measurement recommendations](https://pmc.ncbi.nlm.nih.gov/articles/PMC5316555/)：解释 HRV 时需考虑测量条件；不能直接推断压力或疾病。\n- [COM-B / Behaviour Change Wheel](https://pubmed.ncbi.nlm.nih.gov/21513547/)：行动前询问能力、机会和意愿；本项目实施效果尚未验证。\n\n- 有效记录缺失时不填零；不同设备、来源和算法分别比较。\n- 手环估计不是临床检查；无触发不表示健康达标。\n- 基线规则尚未临床验证，执行和感受不构成因果证据。\n"
+}

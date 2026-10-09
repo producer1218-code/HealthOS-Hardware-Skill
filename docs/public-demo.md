@@ -12,9 +12,9 @@
 
 GitHub Pages 尚需仓库管理员首次在 **Settings → Pages → Source → GitHub Actions** 启用。发布地址只有部署成功、实际打开验证后才能当作在线入口。仓库写入 HTML 不等于网页已发布；未启用时，上面的 GitHub 报告和文件下载始终可用。
 
-本仓库的 Public demo workflow 在每次 main 推送时校验并打包 `site/`；检测到 Pages 已启用才部署。首次启用后，在 **Actions → Public demo → Run workflow** 发布，成功后的地址会显示在部署任务中。
+本仓库的 Public demo workflow 在每次 main 推送时校验并打包公开文件清单；检测到 Pages 已启用才部署。首次启用后，在 **Actions → Public demo → Run workflow** 发布，成功后的地址会显示在部署任务中。
 
-公开站点只部署 `site/`，不会部署私人工作目录、OAuth 凭证、模型密钥或健康记录。Pages 是静态展示；真实同步、LLM 调用和周期推送运行在用户自己的部署环境。
+公开站点由固定允许清单构建：`site/` 加公开 healthos-skill.json 与 llms.txt；配置实际站点 URL 后才生成 canonical 与 sitemap。不会部署私人工作目录、OAuth 凭证、模型密钥或健康记录。Pages 是静态展示；真实同步、LLM 调用和周期推送运行在用户自己的部署环境。
 
 ## 实际界面预览
 

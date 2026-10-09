@@ -1,0 +1,367 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/producer1218-code/healthos-open/main/schemas/agent-context-v1.schema.json",
+  "title": "HealthOS Skill local agent-context-v1 packet",
+  "description": "Serialization contract only. Validation does not establish consent, provenance or clinical validity. Full local packets may contain private context.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "as_of",
+    "goals",
+    "memory",
+    "coverage",
+    "period_summary",
+    "personal_trends",
+    "goal_states",
+    "actions",
+    "methodology",
+    "agent_contract"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "agent-context-v1"
+    },
+    "as_of": {
+      "type": "string",
+      "format": "date"
+    },
+    "goals": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "memory": {
+      "type": "object",
+      "required": [
+        "version",
+        "confirmed_goals",
+        "user_stated_concern",
+        "user_stated_context",
+        "confirmed_shift_work",
+        "feedback_counts",
+        "paused_actions",
+        "measurement_history",
+        "learning_boundary"
+      ],
+      "properties": {
+        "version": {
+          "const": "personal-memory-v1"
+        },
+        "confirmed_goals": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "user_stated_concern": {
+          "type": "string"
+        },
+        "user_stated_context": {
+          "type": "object"
+        },
+        "confirmed_shift_work": {
+          "type": "boolean"
+        },
+        "feedback_counts": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "integer",
+            "minimum": 0
+          }
+        },
+        "paused_actions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "measurement_history": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/coverage"
+          }
+        },
+        "learning_boundary": {
+          "type": "string"
+        }
+      }
+    },
+    "coverage": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/coverage"
+      }
+    },
+    "period_summary": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/summary"
+      }
+    },
+    "personal_trends": {
+      "type": "array",
+      "items": {
+        "allOf": [
+          {
+            "$ref": "#/$defs/stream"
+          }
+        ],
+        "required": [
+          "status"
+        ],
+        "properties": {
+          "status": {
+            "enum": [
+              "calibrating",
+              "insufficient_recent_data",
+              "notable_change",
+              "within_rule_limits",
+              "trend_only"
+            ]
+          }
+        }
+      }
+    },
+    "goal_states": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "goal",
+          "status",
+          "usable_metrics",
+          "missing_or_unusable_metrics",
+          "latest_streams"
+        ],
+        "properties": {
+          "goal": {
+            "type": "string"
+          },
+          "status": {
+            "enum": [
+              "monitoring",
+              "calibrating",
+              "data_incomplete",
+              "optional_connection_or_self_report",
+              "waiting_for_data"
+            ]
+          },
+          "usable_metrics": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "missing_or_unusable_metrics": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "latest_streams": {
+            "type": "array",
+            "items": {
+              "$ref": "#/$defs/coverage"
+            }
+          }
+        }
+      }
+    },
+    "actions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "goal",
+          "trigger",
+          "advice"
+        ],
+        "properties": {
+          "goal": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "trigger": {
+            "type": "object",
+            "required": [
+              "kind"
+            ],
+            "properties": {
+              "kind": {
+                "type": "string"
+              }
+            }
+          },
+          "advice": {
+            "type": "object"
+          }
+        }
+      }
+    },
+    "methodology": {
+      "type": "object",
+      "required": [
+        "version",
+        "evidence",
+        "rule_validation"
+      ],
+      "properties": {
+        "version": {
+          "const": "wellness-report-v1"
+        },
+        "rule_validation": {
+          "type": "string"
+        },
+        "evidence": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "title",
+              "url",
+              "supports"
+            ],
+            "properties": {
+              "title": {
+                "type": "string"
+              },
+              "url": {
+                "type": "string",
+                "format": "uri"
+              },
+              "supports": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "agent_contract": {
+      "type": "string"
+    }
+  },
+  "$defs": {
+    "stream": {
+      "type": "object",
+      "required": [
+        "source",
+        "device_id",
+        "metric"
+      ],
+      "properties": {
+        "source": {
+          "type": "string",
+          "minLength": 1
+        },
+        "device_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "metric": {
+          "enum": [
+            "resting_heart_rate_bpm",
+            "heart_rate_bpm",
+            "hrv_rmssd_ms",
+            "hrv_sdnn_ms",
+            "sleep_minutes",
+            "steps_count",
+            "spo2_pct",
+            "skin_temp_c",
+            "respiratory_rate_bpm",
+            "self_report_energy_0_10"
+          ]
+        }
+      }
+    },
+    "coverage": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/stream"
+        }
+      ],
+      "required": [
+        "latest_record_date",
+        "first_record_date",
+        "valid_record_days",
+        "stale_days"
+      ],
+      "properties": {
+        "latest_record_date": {
+          "type": "string",
+          "format": "date"
+        },
+        "first_record_date": {
+          "type": "string",
+          "format": "date"
+        },
+        "valid_record_days": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "stale_days": {
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    },
+    "summary": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/stream"
+        }
+      ],
+      "required": [
+        "unit",
+        "valid_days",
+        "missing_days",
+        "median",
+        "previous_valid_days",
+        "previous_median",
+        "comparison_status"
+      ],
+      "properties": {
+        "unit": {
+          "type": "string"
+        },
+        "valid_days": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 7
+        },
+        "missing_days": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 7
+        },
+        "median": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "previous_valid_days": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 7
+        },
+        "previous_median": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "comparison_status": {
+          "enum": [
+            "descriptive_only",
+            "insufficient_coverage"
+          ]
+        }
+      }
+    }
+  }
+}

@@ -1,4 +1,6 @@
-# HealthOS Open — factual map for a new AI reader
+# HealthOS Skill — factual map for a new AI reader
+
+Public name: HealthOS Skill (formerly HealthOS Open); repository/package: healthos-open. Skill entry: skills/healthos/SKILL.md. Capability manifest: healthos-skill.json. Integration guide: docs/healthos-skill.md. Answers: docs/faq.md. The skill provides instructions, not a live service or scheduler.
 
 The repository helps a person who cannot interpret their wearable app connect legally accessible records to their own agent, choose a replaceable model and receive periodic reports. Start at README.zh-CN.md and docs/start-here.md; no prior conversation or installation is needed. Public reports render directly on GitHub; docs/public-demo.md explains the standalone synthetic HTML demo. Personal execution instructions are in docs/install.md. Localhost is not a public entry. Pages must be enabled and verified before claiming an online demo.
 
