@@ -1,4 +1,4 @@
-# HealthOS Skill — start with your agent
+# HealthOS Hardware Skill — start with your agent
 
 **中文：把这个链接交给能阅读网页的 Agent。先看一份合成报告，再只回答“我用什么设备、想了解什么”。有执行工具的 Agent 可以替你运行首次体验。**
 
@@ -22,6 +22,6 @@ Synthetic permission never carries over to real data. Only after the user select
 
 ## Copy this request
 
-> 请打开 https://github.com/producer1218-code/healthos-open/blob/main/START_HERE.md ，使用 HealthOS Skill 带我开始。先展示并解释合成报告；如果你有文件和 Python 执行工具，替我按仓库指引运行首次体验。之后只问我设备型号和一个健康目标。先不要索取密钥、上传真人健康记录或声称已经启动监控。
+> 请打开 https://github.com/producer1218-code/healthos-open/blob/main/START_HERE.md ，使用 HealthOS Hardware Skill 带我开始。先展示并解释合成报告；如果你有文件和 Python 执行工具，替我按仓库指引运行首次体验。之后只问我设备型号和一个健康目标。先不要索取密钥、上传真人健康记录或声称已经启动监控。
 
 Machine-readable routing: [agent-start.json](agent-start.json). This is a project-specific manifest, not an automatic registration protocol. A URL does not grant an agent tools, automatically install a Skill or create an always-on service.

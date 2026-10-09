@@ -1,9 +1,10 @@
 {
   "manifest_version": "healthos-skill-v1",
-  "name": "HealthOS Skill",
+  "name": "HealthOS Hardware Skill",
   "skill_name": "healthos",
   "aliases": [
     "HealthOS Open",
+    "HealthOS Skill",
     "healthos-open"
   ],
   "version": "0.6.0.dev0",

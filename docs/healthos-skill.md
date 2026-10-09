@@ -1,6 +1,6 @@
-# HealthOS Skill：把健康硬件记录交给自己的 Agent
+# HealthOS Hardware Skill：把健康硬件记录交给自己的 Agent
 
-**HealthOS Skill 是一个可复用的 Agent 指引包，帮助用户选择已有设备的数据入口，并解释有依据的个人健康观察报告。** HealthOS Open 是原有名称；仓库和 Python 包仍为 healthos-open，旧链接和命令保持有效。
+**HealthOS Hardware Skill 是一个可复用的 Agent 指引包，帮助用户选择已有设备的数据入口，并解释有依据的个人健康观察报告。** HealthOS Open 是原有名称；仓库和 Python 包仍为 healthos-open，旧链接和命令保持有效。
 
 [查看 SKILL.md](../skills/healthos/SKILL.md) · [机器可读能力清单](../healthos-skill.json) · [完整报告示例](sample-health-report.md) · [常见问题](faq.md)
 
@@ -8,7 +8,7 @@
 
 | 部分 | 做什么 |
 | --- | --- |
-| HealthOS Skill | 给 Agent 使用的任务路由、设备字段、方法与权限边界 |
+| HealthOS Hardware Skill | 给 Agent 使用的任务路由、设备字段、方法与权限边界 |
 | HealthOS Python 运行时 | 在用户自己的环境里读数据、计算、保存记忆与报告、检查周期 |
 | 可替换 LLM | 在用户授权下解释计算结果，不能代替确定性统计 |
 | 公开演示 | 用合成数据展示输出结构，不读取真人数据或执行推送 |
@@ -25,7 +25,7 @@
 
 可给 Agent 的任务示例：
 
-> 使用 HealthOS Skill（支持命名调用时用 $healthos）。我是 Fitbit 用户，希望理解睡眠与恢复记录。先指导我确认合法数据入口与实际字段，不要索取我的 OAuth 凭证。我确认目标和用途后，解释我的 HealthOS 报告，保留缺失、来源、证据及未验证边界。
+> 使用 HealthOS Hardware Skill（支持命名调用时用 $healthos）。我是 Fitbit 用户，希望理解睡眠与恢复记录。先指导我确认合法数据入口与实际字段，不要索取我的 OAuth 凭证。我确认目标和用途后，解释我的 HealthOS 报告，保留缺失、来源、证据及未验证边界。
 
 ## 开始验证
 

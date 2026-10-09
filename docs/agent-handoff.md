@@ -1,6 +1,6 @@
 > 新访客先读[无需安装的新用户指引](start-here.md)与[报告示例](sample-health-report.md)。以下协议用于用户确认部署之后，把自己的私人数据交给自己的 Agent；安装步骤见[个人部署](install.md)。
 
-# 把 HealthOS Skill 接给你自己的 Agent
+# 把 HealthOS Hardware Skill 接给你自己的 Agent
 
 可加载的入口是 [SKILL.md](../skills/healthos/SKILL.md)；字段能力见 [healthos-skill.json](../healthos-skill.json)，agent-context-v1 的可选格式校验见 [JSON Schema](../schemas/agent-context-v1.schema.json)。
 

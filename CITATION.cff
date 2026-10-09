@@ -1,6 +1,6 @@
 cff-version: 1.2.0
 message: "If you use this research workbench, cite the repository and the primary studies relevant to your measurement claims."
-title: "HealthOS Skill: wearable-to-agent workflows and evidence-linked wellness reports"
+title: "HealthOS Hardware Skill: wearable-to-agent workflows and evidence-linked wellness reports"
 version: 0.6.0.dev0
 license: MIT
 authors:

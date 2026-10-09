@@ -1,4 +1,4 @@
 interface:
-  display_name: "HealthOS Skill"
+  display_name: "HealthOS Hardware Skill"
   short_description: "Wearable access and evidence-linked wellness reports"
   default_prompt: "Use $healthos to guide my wearable data connection and explain a HealthOS report for my confirmed goals."

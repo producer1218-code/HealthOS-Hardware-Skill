@@ -1,6 +1,6 @@
 # Evidence → design decision → code → validation gap
 
-This ledger is the fastest way to audit the phrase “paper-based method.” The literature informs **measurement discipline and hypotheses**. It has not validated the exact HealthOS Open alert function. A single wearable deviation is not a diagnosis.
+This ledger is the fastest way to audit the phrase “paper-based method.” The literature informs **measurement discipline and hypotheses**. It has not validated the exact HealthOS Hardware Skill alert function. A single wearable deviation is not a diagnosis.
 
 | Published source | Supported principle | Implemented here | Remaining gap |
 | --- | --- | --- | --- |

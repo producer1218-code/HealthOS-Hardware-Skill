@@ -1,8 +1,8 @@
-# HealthOS Skill：让已有手环的数据变成看得懂的健康报告
+# HealthOS Hardware Skill：让已有手环的数据变成看得懂的健康报告
 
 **让 Agent 带你开始：把 [START_HERE.md](START_HERE.md) 链接交给它。** 先看完整合成报告；有 Python 执行工具的 Agent 可用一条命令运行首次体验，不必先安装 HealthOS 或填 LLM key。之后只需回答设备型号和一个目标。[首次体验说明](docs/agent-quickstart.md)。真人设备授权和持续监控仍需实际配置。
 
-HealthOS Skill 是开源的个人健康 Agent Skill 与配套运行时：连接已有健康硬件的数据，插入自己的 LLM，定期获得有依据的健康观察报告，并用反馈更新可检查的个人记忆。
+HealthOS Hardware Skill 是开源的个人健康 Agent Skill 与配套运行时：连接已有健康硬件的数据，插入自己的 LLM，定期获得有依据的健康观察报告，并用反馈更新可检查的个人记忆。
 
 原名 HealthOS Open；仓库和 Python 包仍为 healthos-open。
 

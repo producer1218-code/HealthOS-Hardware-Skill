@@ -6,9 +6,9 @@ metadata:
   version: "0.6.0.dev0"
 ---
 
-# HealthOS Skill
+# HealthOS Hardware Skill
 
-Help someone who cannot interpret their wearable app build or understand their own personal wellness reporting workflow. The public project is [HealthOS Skill](https://github.com/producer1218-code/healthos-open); the Python runtime is named healthos-open. This skill supplies instructions, not a live sensor service or scheduler.
+Help someone who cannot interpret their wearable app build or understand their own personal wellness reporting workflow. The public project is [HealthOS Hardware Skill](https://github.com/producer1218-code/healthos-open); the Python runtime is named healthos-open. This skill supplies instructions, not a live sensor service or scheduler.
 
 ## Route the request
 

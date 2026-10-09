@@ -1,6 +1,6 @@
 # Evidence map and paper synthesis
 
-Reviewed 2026-10-08. Links lead to the original publisher, public-health organization or PubMed record. This repository paraphrases findings and does not include copyrighted full texts. Evidence supports the **research direction**; it does not validate HealthOS Open's invented rule thresholds.
+Reviewed 2026-10-08. Links lead to the original publisher, public-health organization or PubMed record. This repository paraphrases findings and does not include copyrighted full texts. Evidence supports the **research direction**; it does not validate HealthOS Hardware Skill's invented rule thresholds.
 
 | Source | What it contributes | What we implement or defer |
 | --- | --- | --- |

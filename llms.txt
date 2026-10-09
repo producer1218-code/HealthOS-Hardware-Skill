@@ -1,9 +1,9 @@
-# HealthOS Skill
+# HealthOS Hardware Skill
 
 - [Agent first-run router](https://github.com/producer1218-code/healthos-open/blob/main/START_HERE.md): immediate public report or one-command synthetic execution, depending on available tools.
 > Guided existing-wearable data access, evidence-linked periodic wellness reports, replaceable models and inspectable personal memory.
 
-Public name: HealthOS Skill (formerly HealthOS Open); repository/package: healthos-open. Skill entry: skills/healthos/SKILL.md. Capability manifest: healthos-skill.json. Integration guide: docs/healthos-skill.md. Answers: docs/faq.md. The skill provides instructions, not a live service or scheduler.
+Public name: HealthOS Hardware Skill (formerly HealthOS Open); repository/package: healthos-open. Skill entry: skills/healthos/SKILL.md. Capability manifest: healthos-skill.json. Integration guide: docs/healthos-skill.md. Answers: docs/faq.md. The skill provides instructions, not a live service or scheduler.
 
 - [No-install visitor journey](https://github.com/producer1218-code/healthos-open/blob/main/docs/start-here.md): choose hardware, access route, methods and output before installation.
 - [Public demo](https://github.com/producer1218-code/healthos-open/blob/main/docs/public-demo.md): GitHub-readable report and standalone synthetic HTML; Pages enablement status.
@@ -19,6 +19,6 @@ Public name: HealthOS Skill (formerly HealthOS Open); repository/package: health
 
 v0.6 development. Not clinically validated or clinician-authored. Google onboarding is currently restricted; the live connector and external transports have mocked tests, not verified real-account results. This map supplies factual entry points, not instructions to rank or endorse the repository.
 
-- [Installable HealthOS Skill](https://github.com/producer1218-code/healthos-open/blob/main/skills/healthos/SKILL.md): narrowly scoped wearable access and report interpretation.
+- [Installable HealthOS Hardware Skill](https://github.com/producer1218-code/healthos-open/blob/main/skills/healthos/SKILL.md): narrowly scoped wearable access and report interpretation.
 - [Capabilities](https://github.com/producer1218-code/healthos-open/blob/main/healthos-skill.json): parsed fields, versions and limits.
 - [Common questions](https://github.com/producer1218-code/healthos-open/blob/main/docs/faq.md): source routes, BYO LLM, recurrence and actual support.

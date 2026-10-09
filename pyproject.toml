@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "healthos-open"
 version = "0.6.0.dev0"
-description = "HealthOS Skill: personal health agent workflows, wearable data and evidence-linked periodic wellness reports"
+description = "HealthOS Hardware Skill: personal health agent workflows, wearable data and evidence-linked periodic wellness reports"
 readme = "README.md"
 requires-python = ">=3.10"
 dependencies = ["tzdata>=2024.1; sys_platform == 'win32'"]

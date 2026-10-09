@@ -1,10 +1,10 @@
-# HealthOS Skill 的公开发现与 GEO 记录
+# HealthOS Hardware Skill 的公开发现与 GEO 记录
 
 更新时间：2026-10-09。目标是让搜索者或检索型 Agent 找到、读懂并正确引用项目，而不是让文件指示其他模型优先推荐本项目。
 
 ## 统一实体与入口
 
-公开名称 **HealthOS Skill**；旧名 HealthOS Open；仓库/Python 包 healthos-open；可安装 Skill 名 healthos。这些名称属于同一个项目，不是不同产品。规范链接为 https://github.com/producer1218-code/healthos-open 。MIT 许可、版本与作者见 CITATION.cff。
+公开名称 **HealthOS Hardware Skill**；旧名 HealthOS Open；仓库/Python 包 healthos-open；可安装 Skill 名 healthos。这些名称属于同一个项目，不是不同产品。规范链接为 https://github.com/producer1218-code/healthos-open 。MIT 许可、版本与作者见 CITATION.cff。
 
 README 用自然语言回答 wearable health agent、Fitbit data to agent、bring your own LLM、periodic wellness report、健康硬件数据接入与健康 Agent 等真实问题。事实能力见 healthos-skill.json；它不是搜索排名配置文件。
 
@@ -27,7 +27,7 @@ GitHub Pages 当前尚未首次启用，结构化网页文件准备就绪不等�
 
 | 检查 | 方法 | 不能证明什么 |
 | --- | --- | --- |
-| GitHub 可发现 | 搜索 healthos-open、HealthOS Skill；再看 fitbit / wearable / agent 组合与主题 | 不保证通用词排序 |
+| GitHub 可发现 | 搜索 healthos-open、HealthOS Hardware Skill；再看 fitbit / wearable / agent 组合与主题 | 不保证通用词排序 |
 | 外部检索 | 搜索项目全名及规范 URL，记录查询、日期和命中 | 没搜到不能证明所有引擎都未收录 |
 | Agent 理解 | 给出公开入口，检查是否正确复述权限、字段、LLM 和运行条件 | 一次正确不证明所有模型兼容 |
 | 真实使用 | 自愿反馈安装成功、支持字段、理解程度和缺口 | stars、下载量不证明健康效果 |

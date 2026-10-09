@@ -1,10 +1,10 @@
-# HealthOS Skill 常见问题 / Frequently asked questions
+# HealthOS Hardware Skill 常见问题 / Frequently asked questions
 
 更新时间：2026-10-09。项目开发版 0.6.0.dev0。[规范名称与 Skill 入口](healthos-skill.md) · [公开能力清单](../healthos-skill.json)
 
-## HealthOS Skill 是什么？ / What is HealthOS Skill?
+## HealthOS Hardware Skill 是什么？ / What is HealthOS Hardware Skill?
 
-HealthOS Skill 是开源的个人健康 Agent 指引包及配套 Python 运行时。它指导用户把允许使用的已有健康硬件记录接入自己的 Agent，结合目标、数据覆盖、个人趋势、证据和反馈形成定期健康观察报告。仓库地址仍为 healthos-open，不是医院信息系统。
+HealthOS Hardware Skill 是开源的个人健康 Agent 指引包及配套 Python 运行时。它指导用户把允许使用的已有健康硬件记录接入自己的 Agent，结合目标、数据覆盖、个人趋势、证据和反馈形成定期健康观察报告。仓库地址仍为 healthos-open，不是医院信息系统。
 
 ## Fitbit 数据怎样接入 AI Agent？ / How can Fitbit data reach my agent?
 

@@ -32,8 +32,8 @@ def main():
         "jsonl": "Canonical records; no device compatibility implied.",
     }
     save(ROOT / "healthos-skill.json", {
-        "manifest_version": "healthos-skill-v1", "name": "HealthOS Skill", "skill_name": "healthos",
-        "aliases": ["HealthOS Open", "healthos-open"], "version": "0.6.0.dev0", "reviewed_date": "2026-10-09",
+        "manifest_version": "healthos-skill-v1", "name": "HealthOS Hardware Skill", "skill_name": "healthos",
+        "aliases": ["HealthOS Open", "HealthOS Skill", "healthos-open"], "version": "0.6.0.dev0", "reviewed_date": "2026-10-09",
         "canonical_repository": REPO, "license": "MIT",
         "summary": "Guided wearable-to-agent data access, evidence-linked periodic wellness reports, BYO LLM and inspectable user memory.",
         "entrypoints": {"first_run": "START_HERE.md", "first_run_contract": "agent-start.json",
