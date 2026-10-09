@@ -1,6 +1,6 @@
 # HealthOS agent brief — v0.6 development
 
-Start with README.zh-CN.md, docs/google-health-connect.md, docs/report-methodology.md and docs/agent-handoff.md. The product goal is a guided existing-wearable → personal agent → periodic evidence-linked report → explicit feedback/memory journey.
+Start with README.zh-CN.md, docs/start-here.md, docs/public-demo.md, docs/google-health-connect.md, docs/report-methodology.md and docs/agent-handoff.md. Public GitHub reading must work without installation. Put localhost instructions only in explicit personal-deployment or developer sections. site/index.html is a fixed synthetic, dependency-free public demo, not the production analyzer. Never claim Pages is live without verified deployment. The product goal is a guided existing-wearable → personal agent → periodic evidence-linked report → explicit feedback/memory journey.
 
 ## Current implementation
 

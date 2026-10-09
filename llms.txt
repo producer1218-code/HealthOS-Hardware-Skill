@@ -1,6 +1,9 @@
 # HealthOS Open
 > Guided existing-wearable data access, evidence-linked periodic wellness reports, replaceable models and inspectable personal memory.
 
+- [No-install visitor journey](https://github.com/producer1218-code/healthos-open/blob/main/docs/start-here.md): choose hardware, access route, methods and output before installation.
+- [Public demo](https://github.com/producer1218-code/healthos-open/blob/main/docs/public-demo.md): GitHub-readable report and standalone synthetic HTML; Pages enablement status.
+- [Personal deployment](https://github.com/producer1218-code/healthos-open/blob/main/docs/install.md): private installation and runtime, separate from public reading.
 - [User entry in Chinese](https://github.com/producer1218-code/healthos-open/blob/main/README.zh-CN.md): setup, Fitbit user story, data routes, model configuration, reports and feedback.
 - [Fitbit Air / Google access guide](https://github.com/producer1218-code/healthos-open/blob/main/docs/google-health-connect.md): eligible OAuth projects, account linking, restricted fields and export fallback.
 - [Report methodology](https://github.com/producer1218-code/healthos-open/blob/main/docs/report-methodology.md): evidence-to-action chain and explicit research assumptions.

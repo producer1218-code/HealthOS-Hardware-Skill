@@ -11,7 +11,7 @@ ROOT = Path(__file__).resolve().parents[1]
 ROOT_FILES = ["README.md", "README.zh-CN.md", "AI_CONTEXT.md", "AGENTS.md", "llms.txt",
               "CITATION.cff", "LICENSE", "pyproject.toml", ".gitignore",
               "CONTRIBUTING.md", "SECURITY.md", "AUTHORS.md"]
-DIRS = ["src", "docs", "examples", "tests", "scripts", ".github"]
+DIRS = ["src", "docs", "examples", "tests", "scripts", ".github", "site"]
 EXCLUDE_PARTS = {"__pycache__", "_work", ".git", ".venv", "demo-output"}
 EXCLUDE_SUFFIXES = {".pyc", ".pyo", ".token"}
 

@@ -13,3 +13,5 @@ Added:
 Validation: 89 tests passed in the isolated environment with the Google extra installed; core regression, synthetic adapter/report/consent/privacy tests and official OAuth library integration tests. Local browser verification used synthetic data. Real Fitbit Air OAuth, external LLM quality, real Feishu delivery and clinical benefit remain unverified.
 
 The live connector does not imply Google project eligibility. New-project onboarding is paused as checked 2026-10-09. The application relies on user-confirmed OS-encrypted storage rather than providing encryption itself.
+
+Public visitor entry correction (2026-10-09): README is now a no-install tour with GitHub-rendered reports and clear capability links. Personal startup instructions moved to docs/install.md. Added guided visitor documentation, dependency-free standalone synthetic HTML, and a Pages workflow that packages the public site but deploys only after initial administrator enablement. Browser checks cover insufficient records, unimplemented Apple sleep fields, unsupported brands, feedback pause/reset and cadence. No live-site claim is made before deployment.

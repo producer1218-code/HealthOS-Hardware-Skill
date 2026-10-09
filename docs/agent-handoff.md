@@ -1,3 +1,5 @@
+> 新访客先读[无需安装的新用户指引](start-here.md)与[报告示例](sample-health-report.md)。以下协议用于用户确认部署之后，把自己的私人数据交给自己的 Agent；安装步骤见[个人部署](install.md)。
+
 # 把 HealthOS 接给你自己的 Agent
 
 这个仓库有两个入口：普通用户读 README.zh-CN.md 和 Google/Fitbit 接入指南；开发者 Agent 读本页及 AGENTS.md。无需了解作者或会话背景。

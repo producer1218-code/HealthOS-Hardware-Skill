@@ -1,0 +1,58 @@
+name: Public demo
+on:
+  push:
+    branches: [main]
+    paths: ['site/**', '.github/workflows/public-demo.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  prepare:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: read
+    outputs:
+      enabled: ${{ steps.pages.outputs.enabled }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify public-only static bundle
+        run: |
+          test -f site/index.html
+          test -f site/.nojekyll
+          test "$(find site -type f | wc -l)" -eq 2
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+      - name: Check Pages availability
+        id: pages
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          code=$(curl -sS -o "$RUNNER_TEMP/pages.json" -w '%{http_code}' -H "Authorization: Bearer $GH_TOKEN" -H "Accept: application/vnd.github+json" "https://api.github.com/repos/$GITHUB_REPOSITORY/pages")
+          if [ "$code" = 200 ]; then
+            echo 'enabled=true' >> "$GITHUB_OUTPUT"
+          elif [ "$code" = 404 ]; then
+            echo 'enabled=false' >> "$GITHUB_OUTPUT"
+            echo 'Public files are ready. Enable Settings → Pages → GitHub Actions, then run this workflow. GitHub-readable reports remain available.' >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo "Pages status check failed: HTTP $code" >&2
+            exit 1
+          fi
+  deploy:
+    if: needs.prepare.outputs.enabled == 'true'
+    needs: prepare
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    concurrency:
+      group: pages
+      cancel-in-progress: false
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/configure-pages@v5
+      - uses: actions/deploy-pages@v4
+        id: deployment

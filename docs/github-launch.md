@@ -1,7 +1,7 @@
-# Public development repository
+# 公开仓库入口与发布
 
-Target: https://github.com/producer1218-code/healthos-open . v0.5.0.dev0 adds goal-first localhost onboarding, observed Fitbit exports, explicit consent, structured actions, opt-in intent AI, feedback and optional Feishu text delivery.
+公开首页面向没有背景的访客；从 README → docs/start-here.md → 字段、接入、完整报告、方法与论文即可阅读，不要求先启动 localhost。
 
-Publish only reviewed source, docs and synthetic examples. Keep real exports, local profiles, credentials, uploads, SQLite and QA working files private. The source archive builder uses an explicit directory allowlist; review every tracked file before pushing. Clinical effectiveness, live vendor OAuth, actual provider delivery and clinician review are not claimed.
+site/index.html 是独立合成演示；下载 HTML 即可在浏览器打开，不依赖 Python 或服务器。GitHub 不执行仓库 HTML；GitHub Pages 首次启用及部署状态见 [public-demo.md](public-demo.md)。不要在 README 声称尚未启用的站点已经可访问。
 
-CI installs the package on Linux/Windows with Python 3.10/3.12 and runs synthetic tests. The repository version is a development version; do not describe it as a clinically validated release.
+发布只包括公开源码、说明与合成数据；不包含私人记录、密钥、凭证或 SQLite。源码压缩包包含 site。Pages workflow 只上传 site/，未启用 Pages 时打包成功但跳过部署。核心 CI 继续在 Windows/Linux、Python 3.10/3.12 运行。

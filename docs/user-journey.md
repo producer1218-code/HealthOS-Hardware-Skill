@@ -1,46 +1,7 @@
-# Current v0.6 entry
+# 从陌生用户到个人健康系统
 
-The complete consumer journey is now [README.zh-CN.md](../README.zh-CN.md): existing wearable → guided data access → goals and consent → replaceable model → periodic report → feedback and memory. Follow [Fitbit Air / Google setup](google-health-connect.md) and inspect a [synthetic report](sample-health-report.md). The older plan/monitor workflow below is retained as research history; new users should use serve and report/watch.
+先读[公开新用户指引](start-here.md)：设备与实际字段 → 合法交付 → 用户目标与权限 → 方法论报告 → 反馈与记忆。
 
-# 当前 v0.5 使用入口
+在 GitHub 直接查看[完整合成报告](sample-health-report.md)、[方法与论文](report-methodology.md)、[按型号查字段](model-capabilities.md)；无需安装。想互动时看[公开演示说明](public-demo.md)。
 
-从 [本地交互快速开始](../README.zh-CN.md) 与 [Fitbit 导入](fitbit-onboarding.md) 开始。下面保留型号目录与旧研究链路说明；新入口使用 `serve/start/watch` 和 care-v2，不要求先写 profile JSON。
-
-# 从陌生用户诉求到每日建议：完整链路
-
-本仓库现在提供的是**可运行的研究工作流**，不是会自动连接所有手环、自动给诊断结论的成品 App。陌生人可按下面三步从零开始，并看到每一步哪里缺数据。
-
-## 1. 选设备：先问能否取得数据
-
-运行 `python -m healthos models --query "型号名"` 查看[20 行代表型号/平台](model-capabilities.md)。表格把已公开的传感器/用户端指标与**本仓库真实可读的指标**分开。当前有型号绑定的读取器仅覆盖 Apple 健康导出 XML 的部分数量记录、保存到本地的 WHOOP v2 恢复/睡眠 API JSON。规范 CSV 是用户自己映射的通用入口，不等于该型号开放了所有传感器。其他型号必须先核对导出权限与字段。
-
-## 2. 收集诉求：个人目标不是传感器数据
-
-填写 [examples/user_profile.json](../examples/user_profile.json) 的目标、拟使用型号、主要关切、每周通知上限。`main_concern` 仅保存在本地计划，不发送给默认 LLM。执行：
-
-```bash
-python -m healthos plan --profile examples/user_profile.json --output demo-output/user-plan.json
-```
-
-计划会给出设备已能提供的指标、尚不能读取的指标、应该补问的问题、数据通路、校准周期和建议边界。例如选择 Apple Watch 并提出“恢复 + 睡眠”，当前能读静息心率与 SDNN，但当前 Apple XML 适配器**不能**把睡眠分类区间算成睡眠时长，计划会把 `sleep_minutes` 列为缺口，而不会给出基于该字段的睡眠建议。
-
-| 用户诉求 | 可量化数据 | 需要主动问用户 | 何时才能给趋势反馈 | 建议边界 |
-| --- | --- | --- | --- | --- |
-| 睡眠 | 同设备睡眠时长，前提是适配器能算 | 想改善时长、规律性还是白天状态？轮班、照护、旅行？ | 14 个有效基线日和最近 3 个有效日后，且满足变化双门槛 | 可以建议检查作息与设备记录条件；[CDC](https://www.cdc.gov/sleep/about/index.html)列有一般睡眠习惯。不能诊断睡眠疾病。 |
-| 训练/恢复 | 静息心率、RMSSD 或 SDNN；不同 HRV 算法分开 | 训练量、疾病、旅行、饮酒、药物或佩戴是否改变？ | 同一来源/设备建立个人基线后 | 提醒核查背景，不把 HRV 降低直接解释为压力或过度训练。[HRV 测量建议](https://pmc.ncbi.nlm.nih.gov/articles/PMC5316555/) |
-| 活动 | 规范的每日累计步数；目前仅趋势展示 | 哪种活动可行？工作、行动能力、时间和环境有何限制？ | 有可比的日记录后展示趋势；当前无活动通知阈值 | 步数不能推断中高强度活动；[WHO 指南](https://www.who.int/publications/i/item/9789240014886)可用于一般讨论，不能从步数直接判定达标。 |
-| 精力/心理状态 | 自愿填写的 0–10 精力评分；**不是** WHO-5 | 用户怎么描述自己的状态？愿不愿意每周自评？ | 自评数据足够后只显示个人趋势 | 不从心率/HRV推断情绪或诊断。正式问卷需另行取得适用版本并验证。[WHO-5](https://www.who.int/publications/m/item/WHO-UCN-MSD-MHE-2024.01) |
-| 社会连接 | 当前不从设备自动量化 | 关注的是关系质量、接触机会，还是孤独感？是否愿意自愿记录？ | 无自动传感器结论 | 采用自愿自评和背景访谈；不能由通讯录、录音或位置推断孤独。[WHO 社会连接报告](https://www.who.int/publications/i/item/978240112360) |
-
-## 3. 用方法论形成建议，而不是让 LLM 发明结论
-
-许可导出 → 适配器统一单位/时间/设备来源 → 质量门控 → 每设备 28 天候选基线（至少 14 有效日）→ 最近 3 天中位数 → MAD 和绝对变化双门槛 → 目标过滤 → 冷却期和每周通知预算 → **本地 JSON 中的观察、问题和低风险下一步** → 可选 LLM 改写文案。
-
-每条通知都带基线、最近值、有效天数、规则版本、问题和建议来源。建议只说明“可以先核查什么”，不会宣称变化的原因。LLM 不能新增通知或改变规则结果。精确阈值和通知节奏是[工程假设](method.md)，不是论文或医院给出的临床界值；[证据到代码对照](evidence-to-code.md)逐条说明依据与验证缺口。
-
-当前 `monitor` 只写本地 JSON，外部任务计划程序可以每天调用。手机推送、实时厂商同步、动态个性化干预、医学验证尚待建设。若数据不足，系统应说“校准中/不足”，而不是给建议。
-
-
-## v0.4 开发版补充
-
-新增自愿授权、多来源动态计划、行动建议、SQLite 投递与反馈及可选飞书文本发送。旧 monitor 仍是研究兼容路径，其生成候选即更新冷却的逻辑不适用于新闭环。实验性 Google Health 读取器仅处理已保存的 Fitbit 静息心率；没有新增实时同步。实际能力与限制见[个性化闭环](personalized-care.md)。
+看懂后再进入[个人部署](install.md)，确认数据和模型的授权。用户自己的常驻进程负责同步、分析与推送；仓库和静态网页不运行私人监控。旧 plan/monitor 命令为研究兼容接口，不是新用户的主要入口。

@@ -1,6 +1,6 @@
 # HealthOS Open — factual map for a new AI reader
 
-The repository helps a person who cannot interpret their wearable app connect legally accessible records to their own agent, choose a replaceable model and receive periodic reports. Start at README.zh-CN.md; no prior conversation is needed.
+The repository helps a person who cannot interpret their wearable app connect legally accessible records to their own agent, choose a replaceable model and receive periodic reports. Start at README.zh-CN.md and docs/start-here.md; no prior conversation or installation is needed. Public reports render directly on GitHub; docs/public-demo.md explains the standalone synthetic HTML demo. Personal execution instructions are in docs/install.md. Localhost is not a public entry. Pages must be enabled and verified before claiming an online demo.
 
 v0.6 connects user goal clarification, granular consent, Fitbit export or eligible experimental Google Health OAuth, deterministic quality/trend computation, evidence-linked reports, optional model explanation, local/Feishu delivery and inspectable memory.
 
