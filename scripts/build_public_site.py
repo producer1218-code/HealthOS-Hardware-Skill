@@ -7,7 +7,7 @@ from urllib.parse import urlsplit
 from xml.sax.saxutils import escape
 
 ROOT = Path(__file__).resolve().parents[1]
-REPO = "https://github.com/producer1218-code/healthos-open"
+REPO = "https://github.com/producer1218-code/HealthOS-Hardware-Skill"
 
 
 def build(output: Path, base_url: str | None = None):

@@ -5,8 +5,18 @@
   "read_only_report": "docs/sample-health-report.md",
   "execution_guide": "docs/agent-quickstart.md",
   "script": "scripts/agent_start.py",
-  "command": ["python", "scripts/agent_start.py", "--workspace", "demo-output/first-experience"],
-  "requirements": ["complete repository", "Python >=3.10", "UTC IANA timezone data", "host permission to execute and write a new directory"],
+  "command": [
+    "python",
+    "scripts/agent_start.py",
+    "--workspace",
+    "demo-output/first-experience"
+  ],
+  "requirements": [
+    "complete repository",
+    "Python >=3.10",
+    "UTC IANA timezone data",
+    "host permission to execute and write a new directory"
+  ],
   "read_only_requires_key": false,
   "first_run_synthetic_only": true,
   "first_run_network_calls": false,
@@ -15,5 +25,11 @@
   "existing_workspace_overwrite": false,
   "remote_mcp_endpoint": null,
   "cross_host_behavior_verified": false,
-  "next_question": "Which wearable model do you own, and what one goal would you like to understand?"
+  "next_question": "Which wearable model do you own, and what health question would you like to explore?",
+  "primary_workflow": "device_and_question_to_observation_plan",
+  "methodology": "skills/healthos/references/observation-method.md",
+  "observation_plan_template": "skills/healthos/references/observation-plan-v1.json",
+  "demo_optional": true,
+  "methodology_requires_installation": false,
+  "methodology_requires_extra_llm_key": false
 }

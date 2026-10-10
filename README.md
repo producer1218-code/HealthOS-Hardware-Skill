@@ -1,53 +1,53 @@
-# HealthOS Hardware Skill — personal health agents for wearable data
+# HealthOS Hardware Skill
 
-**Start with your agent:** give it [START_HERE.md](START_HERE.md). It can explain a complete synthetic report immediately; with Python execution tools it can run the first experience in one command, without installing HealthOS or providing an LLM key. [How it works](docs/agent-quickstart.md). Real-device access and ongoing monitoring still need your setup and permission.
+**Your wearable. Your agent. Your health questions.**
 
-[![tests](https://github.com/producer1218-code/healthos-open/actions/workflows/tests.yml/badge.svg)](https://github.com/producer1218-code/healthos-open/actions/workflows/tests.yml)
+![HealthOS methodology: discover permitted data, choose a personal goal, build a comparable baseline, review evidence and learn from explicit feedback](docs/assets/healthos-product-proposition.png)
+
+A methodology for your existing AI agent to discover permitted wearable data, ask what matters to you, and turn records into a personal health observation plan, evidence-linked reports and reviewable feedback.
+
+**Already use an agent and own a wearable? Give it [START_HERE.md](START_HERE.md).** Start with your device and health question. No installation, extra LLM key or demo is required for the planning conversation.
+
+[中文说明](README.zh-CN.md) · [Agent Skill](skills/healthos/SKILL.md) · [Observation method](docs/observation-method.md) · [Implemented fields](docs/start-here.md) · [Evidence](docs/report-methodology.md)
+
+[![tests](https://github.com/producer1218-code/HealthOS-Hardware-Skill/actions/workflows/tests.yml/badge.svg)](https://github.com/producer1218-code/HealthOS-Hardware-Skill/actions/workflows/tests.yml)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
-**Understand the wearable you already own. Connect permitted records to your own agent, receive evidence-linked reports, and refine a personal plan through feedback.**
+## From a health question to an observation plan
 
-**第一次来？[中文入口](README.zh-CN.md) → [新用户指引](docs/start-here.md) → [直接查看完整报告](docs/sample-health-report.md)。阅读无需安装、登录或密钥。**
+| Stage | What the agent does | What you gain |
+| --- | --- | --- |
+| Discover | Identify the actual model, official data route and access eligibility | Understand what your existing device can share |
+| Ask | Clarify your question, relevant context and data preferences | A goal that the available records can help describe |
+| Plan | Map the question to fields, quality checks, evidence and review cadence | A reviewable personal observation plan |
+| Observe | Use permitted comparable records; preserve gaps and source/method differences | Personal trends with explicit uncertainty |
+| Report | Separate facts, possible explanations, unknowns and feasible actions | Understandable evidence-linked reports |
+| Review | Ask about execution, suitability and self-reported outcome | Authorized memory that can be inspected, corrected and cleared |
 
-**An open-source Agent Skill and companion Python runtime for permitted wearable data, bring-your-own LLM, evidence-linked periodic wellness reports and inspectable memory.** Formerly HealthOS Open; repository and package remain healthos-open.
+For example: “I own a wearable, but feel tired lately.” The agent first asks whether you care about sleep, daytime energy or training recovery, checks what records are accessible, and proposes an observation plan. It does not attribute fatigue to HRV or invent a diagnosis.
 
-[Installable SKILL.md](skills/healthos/SKILL.md) · [Skill integration](docs/healthos-skill.md) · [FAQ](docs/faq.md) · [Machine-readable capabilities](healthos-skill.json)
+The complete [agent protocol](skills/healthos/references/observation-method.md) includes question-to-data mapping, evidence boundaries, feedback and an optional [plan template](skills/healthos/references/observation-plan-v1.json). The template is a proposal format; the runtime does not import it automatically.
 
-## Explore without installing anything
+## Methodology first, pluggable execution
 
-| Your question | Public entry |
-| --- | --- |
-| Which devices and fields are actually supported? | [Device and field matrix](docs/model-capabilities.md) |
-| How do permitted records reach my own agent? | [Guided journey](docs/start-here.md) · [Fitbit / Google access](docs/google-health-connect.md) |
-| How does a health method become a suggestion? | [Evidence, calculations, context and feedback](docs/report-methodology.md) |
-| What does the output look like? | [Complete synthetic report](docs/sample-health-report.md) · [No-install interactive demo](docs/public-demo.md) |
-| Can I replace the LLM, data source and delivery channel? | [Plugin contracts](docs/plugins.md) · [Agent handoff](docs/agent-handoff.md) |
-| How do I run it privately after exploring? | [Personal deployment and configuration](docs/install.md) |
+| Layer | Entry | Current scope |
+| --- | --- | --- |
+| Agent method | [SKILL.md](skills/healthos/SKILL.md), [observation protocol](docs/observation-method.md) | Read and plan through an existing agent; no additional model key needed |
+| Device access | [Fields and adapters](docs/start-here.md), [device research](docs/model-capabilities.md) | Vendor capability and working repository integration are separate |
+| Analysis and evidence | [Report methodology](docs/report-methodology.md), [evidence-to-code](docs/evidence-to-code.md) | Deterministic Python prototype; personal baseline thresholds are engineering hypotheses |
+| Models and delivery | [Plugin contracts](docs/plugins.md), [handoff](docs/agent-handoff.md) | Optional model explanation and authorized transport |
+| Persistence and scheduling | [Private deployment](docs/install.md) | User-operated environment required for real ongoing service |
 
-## The user journey
+Current v0.6 development readers include observed Fitbit exports, experimental eligible Google Health API / saved JSON, partial Apple Health XML and saved WHOOP v2 responses, plus canonical CSV/JSONL. The 20-row device catalog is research coverage, not 20 verified integrations. New Google Health projects are currently paused, checked 2026-10-09; verify [official access status](https://developers.google.com/health/about) before setup. Live device/account compatibility remains unverified.
 
-Existing wearable + confirmed goals → guided official export or eligible API access → explicit field and purpose consent → quality, missingness and separate personal baselines → periodic report with evidence, questions and small actions → optional model explanation and opted-in delivery → feedback and inspectable memory.
+Public literature supports measurement discipline and general-wellness discussion. It does not validate this project's thresholds or health outcomes. Reports are not clinician-authored. See [literature](docs/literature.md) and [security](SECURITY.md).
 
-A Fitbit Air user first checks access eligibility and actual fields. Eligible Google projects can try the experimental read-only connector; other users can start with official exports. The agent asks about goals and context, compares comparable records, reports what is known and missing, and uses feedback to pause unsuitable actions. It does not infer illness, emotions or intervention efficacy from wearables.
+## Explore or execute when ready
 
-## Inspect a complete report format
+Read the [complete synthetic report](docs/sample-health-report.md) to see the output. The [optional one-command demo](docs/agent-quickstart.md) runs without an LLM key; the [standalone HTML demo](docs/public-demo.md) uses fixed synthetic examples. Neither starts personal monitoring. Pages deployment has not been verified.
 
-![Synthetic report preview](docs/synthetic-report-ui.png)
+Use [personal deployment](docs/install.md) after deciding what to analyze and where. Reading a GitHub URL does not install a Skill, link accounts, create durable memory or schedule reports. Real records and credentials belong in your chosen private environment.
 
-[Read the complete synthetic report](docs/sample-health-report.md) directly on GitHub. No author-hosted service is needed. The [standalone HTML demo](docs/public-demo.md) can be downloaded and opened in a browser, with no dependencies or keys. It uses fixed synthetic examples, does not run the production analyzer, and makes no API or model calls.
+The public repository is HealthOS-Hardware-Skill; the Python package remains healthos-open. Factual discovery entrypoints: [llms.txt](llms.txt), [AI_CONTEXT.md](AI_CONTEXT.md), [capability manifest](healthos-skill.json), [FAQ](docs/faq.md). These help an agent assess relevance; they do not guarantee search ranking or automatic discovery.
 
-GitHub Pages deployment files are included. Initial Pages enablement still requires a repository administrator; deployment is skipped until enabled. The [demo guide](docs/public-demo.md) explains publishing. An unverified site URL is not presented as a live demo.
-
-## Current implementation and limits
-
-v0.6 development: observed Fitbit exports; experimental eligible Google Health API / saved v4 JSON; Apple Health XML and saved WHOOP v2 subsets; canonical CSV/JSONL; personal onboarding; deterministic periodic reports; replaceable LLM prose; inspectable memory and optional Feishu transport.
-
-See the [exact field table](docs/start-here.md). The 20-row catalog is research coverage, not 20 verified integrations. Google pauses new project onboarding, checked 2026-10-09; creating an OAuth client is not eligibility. [Official status](https://developers.google.com/health). Live Fitbit Air compatibility remains unverified.
-
-Primary research and guidelines inform general-wellness reasoning. Reports are not clinician-authored; clinical efficacy, live accounts, external delivery and baseline thresholds remain unverified. [Methodology](docs/report-methodology.md) · [Literature](docs/literature.md) · [Security](SECURITY.md).
-
-## Run your own system when ready
-
-Follow [personal deployment](docs/install.md) for installation, credentials, model configuration, recurring execution and delivery. Localhost is a private interface on each operator's computer after startup, not a public repository entry. GitHub does not run private monitoring. Never commit personal records, OAuth credentials or model keys.
-
-For contributors: [AGENTS.md](AGENTS.md), [tests](tests), [plugins](docs/plugins.md), [validation](docs/validation.md). Backend checks cover Linux/Windows on Python 3.10/3.12; public examples use synthetic data.
+For contributors: [AGENTS.md](AGENTS.md), [tests](tests), [validation](docs/validation.md). All public examples are synthetic.

@@ -8,10 +8,10 @@
     "healthos-open"
   ],
   "version": "0.6.0.dev0",
-  "reviewed_date": "2026-10-09",
-  "canonical_repository": "https://github.com/producer1218-code/healthos-open",
+  "reviewed_date": "2026-10-10",
+  "canonical_repository": "https://github.com/producer1218-code/HealthOS-Hardware-Skill",
   "license": "MIT",
-  "summary": "Guided wearable-to-agent data access, evidence-linked periodic wellness reports, BYO LLM and inspectable user memory.",
+  "summary": "A methodology for your existing agent: discover wearable data access, clarify personal health questions, design observation plans and review evidence-linked reports and feedback.",
   "entrypoints": {
     "first_run": "START_HERE.md",
     "first_run_contract": "agent-start.json",
@@ -22,7 +22,9 @@
     "deployment": "docs/install.md",
     "schema": "schemas/agent-context-v1.schema.json",
     "synthetic_input": "examples/agent_packet.synthetic.json",
-    "synthetic_output": "examples/wellness_report.synthetic.json"
+    "synthetic_output": "examples/wellness_report.synthetic.json",
+    "observation_method": "skills/healthos/references/observation-method.md",
+    "observation_plan": "skills/healthos/references/observation-plan-v1.json"
   },
   "data_adapters": [
     {

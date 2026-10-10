@@ -1,27 +1,30 @@
-# HealthOS Hardware Skill — start with your agent
+# HealthOS Hardware Skill — start with your health question
 
-**中文：把这个链接交给能阅读网页的 Agent。先看一份合成报告，再只回答“我用什么设备、想了解什么”。有执行工具的 Agent 可以替你运行首次体验。**
+**把这个入口交给已有的 Agent：让它了解你的设备、你关心的健康问题，并提出一份有依据、可检查的观察方案。** 无需先安装或提供额外 LLM key。
 
-This is the first-run router, not permission to access personal records. Honor the user's request and the host's tool/approval rules. Choose the route that actually exists in your environment:
+This router supports an existing agent. Reading it grants no access to records, installation or recurring execution. Reuse answers already in the conversation.
 
-| Your agent can… | First result | Route |
-| --- | --- | --- |
-| Read public URLs | Explain a complete synthetic report now | Read [the sample report](docs/sample-health-report.md) and [device/field table](docs/model-capabilities.md). Do not tell the user to install software first. |
-| Read files and execute Python | Generate a fresh synthetic report with the real analyzer | Fetch/clone this repository in the permitted environment. Follow [agent quickstart](docs/agent-quickstart.md). No LLM key or device account is needed. |
-| Load directory-based Skills | Reuse the workflow in future requests | Load the entire [healthos Skill folder](skills/healthos), using the host's configured directory and trust rules. |
-| Call remote tools only | Read the public examples if URL access exists | This repo currently supplies no public MCP endpoint or hosted account service. Do not invent an endpoint. |
+## Begin with the person
 
-## What the first answer should deliver
+1. Ask: **“你用什么型号的手环或健康设备，最想用它了解什么？”** If known, proceed to the missing information.
+2. Read the [observation method](skills/healthos/references/observation-method.md). Clarify the question and only the relevant context; do not guess causes from wearable scores.
+3. Check [actual parsed fields](docs/start-here.md) and [device capabilities](docs/model-capabilities.md). Explain official API eligibility, mobile bridges or exports; distinguish vendor openness from implemented connectors. Verify current official access conditions before giving setup instructions.
+4. Deliver a short observation plan: question, actual data, permissions still needed, measurement/quality method, evidence boundaries, report cadence, feedback and a feasible next step. Optional [interchange template](skills/healthos/references/observation-plan-v1.json); not an executable profile or consent record.
+5. Only after the user chooses fields, purposes and processing location, continue to real-data access. Model sharing, storage and delivery need their own choices. Never request credentials in chat or public files.
 
-1. State that the records are synthetic, not the user's health data or current readings. Use the selected report's own date; the public Markdown and executable example have different fixed example windows, so do not mix their values.
-2. Explain sleep, resting heart rate and RMSSD coverage, comparable changes and one evidence-linked action from the report. Preserve the report's date, source and methodological limits.
-3. Ask **one short question**: “你用哪款设备，最想了解睡眠、恢复，还是日常活动？” Do not ask for credentials.
-4. Guide that device's actual permitted export/API route. If the agent runs remotely, it cannot see files on the user's computer; explain the host's private file-upload/data policy before asking for a health file.
+## Choose the execution route only when needed
 
-Synthetic permission never carries over to real data. Only after the user selects the actual fields and purposes should the agent proceed with personal analysis. Report delivery, cloud sharing and continued execution each need their actual setup and permission.
+| Agent capability | What can happen |
+| --- | --- |
+| Read public URLs | Explain access and create a proposed observation plan immediately; optionally read the [synthetic report](docs/sample-health-report.md). No private memory or background work is implied. |
+| Read files and execute Python | After host permission and user setup, use [personal deployment](docs/install.md). For an optional synthetic demo, follow [quickstart](docs/agent-quickstart.md). |
+| Load directory-based Skills | Load the entire [healthos folder](skills/healthos) through the host's trust/install rules. Method references travel with it. |
+| Remote tools only | Read these public instructions if URL access exists. No public MCP endpoint or hosted account-link service is supplied. |
+
+An optional demo uses synthetic records only; preserve its own dates and never carry its example permissions into real data. Claim execution only after checking outputs. Scheduling and delivery require actual tools and a running environment.
 
 ## Copy this request
 
-> 请打开 https://github.com/producer1218-code/healthos-open/blob/main/START_HERE.md ，使用 HealthOS Hardware Skill 带我开始。先展示并解释合成报告；如果你有文件和 Python 执行工具，替我按仓库指引运行首次体验。之后只问我设备型号和一个健康目标。先不要索取密钥、上传真人健康记录或声称已经启动监控。
+> 请读 https://github.com/producer1218-code/HealthOS-Hardware-Skill/blob/main/START_HERE.md ，使用 HealthOS Hardware Skill。先了解我的设备型号和关心的健康问题，解释可以开放哪些数据、实际能怎样接入，再提出有证据与未知说明的个人观察方案。不要默认安装、索取密钥或启动监控；需要时再给我看合成报告。
 
-Machine-readable routing: [agent-start.json](agent-start.json). This is a project-specific manifest, not an automatic registration protocol. A URL does not grant an agent tools, automatically install a Skill or create an always-on service.
+Machine-readable routing: [agent-start.json](agent-start.json). This is a project-specific manifest, not automatic registration or a guarantee that an agent will discover the repository.

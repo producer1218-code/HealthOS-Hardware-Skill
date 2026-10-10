@@ -1,6 +1,6 @@
 # HealthOS Hardware Skill：把健康硬件记录交给自己的 Agent
 
-**HealthOS Hardware Skill 是一个可复用的 Agent 指引包，帮助用户选择已有设备的数据入口，并解释有依据的个人健康观察报告。** HealthOS Open 是原有名称；仓库和 Python 包仍为 healthos-open，旧链接和命令保持有效。
+**HealthOS Hardware Skill 是一个可复用的 Agent 指引包，帮助用户选择已有设备的数据入口，并解释有依据的个人健康观察报告。** HealthOS Open 是原有名称；仓库为 HealthOS-Hardware-Skill，Python 包仍为 healthos-open，旧链接和命令保持有效。
 
 [查看 SKILL.md](../skills/healthos/SKILL.md) · [机器可读能力清单](../healthos-skill.json) · [完整报告示例](sample-health-report.md) · [常见问题](faq.md)
 
@@ -17,7 +17,7 @@
 
 ## 如何交给自己的 Agent
 
-最短路径：把 [START_HERE.md](../START_HERE.md) 的公开链接交给 Agent。它按实际工具选择立即讲解合成报告，或一条命令运行生产分析器。无需先填写 LLM key；真实账号、数据和持续运行在体验之后逐项确认。[操作与限制](agent-quickstart.md)。
+最短路径：把 [START_HERE.md](../START_HERE.md) 的公开链接交给 Agent。它先识别设备和用户关心的问题，再按[观察方法论](observation-method.md)说明数据用途、证据和可执行下一步。无需先填写额外 LLM key；合成报告是可选示例。真实账号、数据和持续运行逐项确认。[操作与限制](agent-quickstart.md)。
 
 无需安装的方式：把 [SKILL.md](../skills/healthos/SKILL.md) 与相邻的 references/workflow.md 交给你的 Agent，或让它读这个仓库。它应先解释实际可取得的字段和访问资格，再收集用户目标。
 

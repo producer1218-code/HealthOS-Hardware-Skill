@@ -12,7 +12,7 @@ from healthos.permissions import PATHS
 from healthos.reports import agent_packet, build_report
 
 ROOT = Path(__file__).resolve().parents[1]
-REPO = "https://github.com/producer1218-code/healthos-open"
+REPO = "https://github.com/producer1218-code/HealthOS-Hardware-Skill"
 
 
 def save(path, value):
@@ -33,11 +33,13 @@ def main():
     }
     save(ROOT / "healthos-skill.json", {
         "manifest_version": "healthos-skill-v1", "name": "HealthOS Hardware Skill", "skill_name": "healthos",
-        "aliases": ["HealthOS Open", "HealthOS Skill", "healthos-open"], "version": "0.6.0.dev0", "reviewed_date": "2026-10-09",
+        "aliases": ["HealthOS Open", "HealthOS Skill", "healthos-open"], "version": "0.6.0.dev0", "reviewed_date": "2026-10-10",
         "canonical_repository": REPO, "license": "MIT",
-        "summary": "Guided wearable-to-agent data access, evidence-linked periodic wellness reports, BYO LLM and inspectable user memory.",
+        "summary": "A methodology for your existing agent: discover wearable data access, clarify personal health questions, design observation plans and review evidence-linked reports and feedback.",
         "entrypoints": {"first_run": "START_HERE.md", "first_run_contract": "agent-start.json",
                         "skill": "skills/healthos/SKILL.md", "user": "docs/start-here.md",
+                        "observation_method": "skills/healthos/references/observation-method.md",
+                        "observation_plan": "skills/healthos/references/observation-plan-v1.json",
                         "methods": "docs/report-methodology.md", "faq": "docs/faq.md",
                         "deployment": "docs/install.md", "schema": "schemas/agent-context-v1.schema.json",
                         "synthetic_input": "examples/agent_packet.synthetic.json",

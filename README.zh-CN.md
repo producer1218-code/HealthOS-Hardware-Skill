@@ -1,48 +1,49 @@
-# HealthOS Hardware Skill：让已有手环的数据变成看得懂的健康报告
+# HealthOS Hardware Skill
 
-**让 Agent 带你开始：把 [START_HERE.md](START_HERE.md) 链接交给它。** 先看完整合成报告；有 Python 执行工具的 Agent 可用一条命令运行首次体验，不必先安装 HealthOS 或填 LLM key。之后只需回答设备型号和一个目标。[首次体验说明](docs/agent-quickstart.md)。真人设备授权和持续监控仍需实际配置。
+**你的设备，你的 Agent，你关心的健康问题。**
 
-HealthOS Hardware Skill 是开源的个人健康 Agent Skill 与配套运行时：连接已有健康硬件的数据，插入自己的 LLM，定期获得有依据的健康观察报告，并用反馈更新可检查的个人记忆。
+![HealthOS 产品主张：发现开放数据、确认个人诉求、建立基线、审视证据、通过反馈迭代](docs/assets/healthos-product-proposition.png)
 
-原名 HealthOS Open；仓库和 Python 包仍为 healthos-open。
+一套给已有 Agent 使用的个人健康观察方法论：让它识别你已有硬件的数据入口，询问你关心什么，再把允许使用的记录转化为观察方案、证据可追溯的报告和可复盘行动。
 
-[查看可安装 Skill](skills/healthos/SKILL.md) · [Skill 使用说明](docs/healthos-skill.md) · [常见问题](docs/faq.md) · [机器可读能力清单](healthos-skill.json)
+**你已经会用 Agent，也有手环？把 [START_HERE.md](START_HERE.md) 交给它。** 第一轮从设备型号和健康问题开始，无需先安装、填额外 LLM key 或观看演示。
 
-**第一次来？不用安装、不用提供密钥。先了解你已有的设备怎么接，把数据交给自己的 Agent 后能得到什么。**
+[Agent Skill](skills/healthos/SKILL.md) · [完整方法论](docs/observation-method.md) · [实际适配字段](docs/start-here.md) · [方法与论文](docs/report-methodology.md) · [English](README.md)
 
-[从这里开始](docs/start-here.md) · [直接阅读完整报告](docs/sample-health-report.md) · [无需安装的交互演示](docs/public-demo.md) · [按型号查字段](docs/model-capabilities.md) · [核对方法与论文](docs/report-methodology.md)
+## 一个陌生人可以如何开始
 
-## 这个 GitHub 给你什么
+例如你说：“我有手环，但最近总觉得累，看 App 也看不懂。”Agent 先了解你关心睡眠、白天精力还是训练恢复，询问必要背景，核实设备数据能否开放，再与你讨论观察什么。它不会直接把疲劳归因于 HRV。
 
-| 你想知道 | 直接打开 |
-| --- | --- |
-| 我的 Fitbit、Apple Watch、WHOOP 或国内手环能接吗？ | [型号、读取字段与适配缺口](docs/model-capabilities.md) |
-| 数据怎样合法交给自己的 Agent？ | [新用户路径](docs/start-here.md) · [Fitbit / Google 接入指引](docs/google-health-connect.md) |
-| 它怎样结合健康方法论与个人诉求？ | [输入 → 方法 → 证据 → 行动 → 反馈](docs/report-methodology.md) |
-| 我到底会收到怎样的报告？ | [完整合成报告](docs/sample-health-report.md) · [交互体验说明](docs/public-demo.md) |
-| 怎么换成自己的 LLM、数据源和推送渠道？ | [插件协议](docs/plugins.md) · [Agent 交接说明](docs/agent-handoff.md) |
-| 看懂后，怎么真正用自己的数据运行？ | [个人部署与配置](docs/install.md) |
+| 阶段 | Agent 按方法论做什么 | 你得到什么 |
+| --- | --- | --- |
+| 发现数据 | 识别型号、手机平台、官方入口与访问资格 | 原来设备数据可以怎样交给自己的 Agent |
+| 确认诉求 | 询问具体问题、时间与必要背景，沿用已有回答 | 能被现有数据部分回答的个人目标 |
+| 制定计划 | 明确指标、权限、质量检查、证据与复盘周期 | 一份可检查、可修改的观察方案 |
+| 持续观察 | 在授权与执行条件具备后积累记录，分流比较个人基线 | 了解自己的变化与数据缺口 |
+| 报告解释 | 区分事实、可能解释、未知与可行动项 | 看得懂且能追溯依据的报告 |
+| 反馈迭代 | 分别记录执行、适合程度与自述感受 | 可查看、纠正、删除的授权记忆 |
 
-## 以 Fitbit Air 用户为例
+[Agent 观察协议](skills/healthos/references/observation-method.md)规定问题怎样映射到数据、何时补问背景、怎样选择可行行动与保留未知。[观察计划 JSON 模板](skills/healthos/references/observation-plan-v1.json)用于交接提案，当前不能自动导入运行时，也不能代替用户授权。
 
-你关注睡眠与恢复，但看不懂 App 的数字。先按[指引](docs/google-health-connect.md)确认数据访问资格：没有 Google API 项目资格时，从官方导出开始；已获资格时，可试实验性只读接口。HealthOS 当前 API 读取日静息心率、日均 RMSSD、已处理主睡眠，导出还可读取步数子集。
+## 方法论与可插拔执行组件
 
-随后确认目标、生活背景和每个字段的用途。系统检查记录与缺失，分设备和算法比较自己的基线，生成有证据链接的报告。自己的 LLM 可补充解释；周期推送和模型分享分别授权。记录是否执行、是否适合和自述感受，系统据此更新可查看、可清除的档案。
+方法论可以先在已有 Agent 中使用；真实接入和周期运行需要相应组件。使用已有 Agent 不需要再给 HealthOS 一个模型 key，只有运行时要独立调用模型时才配置。
 
-**截至 2026-10-09，Google 暂停新项目接入；创建 OAuth 客户端不等于取得资格。** [官方状态](https://developers.google.com/health)。真实 Fitbit Air 账号接入仍未验证。
+| 组件 | 可替换内容 | 当前入口 |
+| --- | --- | --- |
+| 数据 | 官方 API、手机健康平台、导出、受信适配器 | [实际字段](docs/start-here.md)、[型号目录](docs/model-capabilities.md) |
+| 计算 | 质量、缺失、来源与方法隔离、个人基线 | [报告方法](docs/report-methodology.md) |
+| 解释 | 已有 Agent，或可选独立 LLM | [Agent 交接](docs/agent-handoff.md) |
+| 记忆与推送 | 私人存储、调度、投递渠道 | [插件协议](docs/plugins.md)、[个人部署](docs/install.md) |
 
-## 报告长什么样
+当前 v0.6 原型支持 Fitbit 官方导出、符合资格的实验性 Google API／保存 JSON、Apple Health XML 和 WHOOP 保存 JSON 子集，以及标准 CSV/JSONL。20 行设备目录是调研覆盖，不是 20 个已验证连接器。Google 暂停新项目接入，最近核实 2026-10-09；实际操作前再次核对[官方状态](https://developers.google.com/health/about)。
 
-![合成数据报告示例](docs/synthetic-report-ui.png)
+论文与指南支持测量纪律、背景访谈和一般健康行动；个人基线阈值是工程假设，没有临床专家签字或健康效果验证。[论文到代码](docs/evidence-to-code.md) · [安全与隐私](SECURITY.md)。
 
-[阅读完整报告](docs/sample-health-report.md)：目标与数据覆盖、本周与上周、个人趋势、背景问题、下周行动、反馈记忆、证据与未知。数字全部为合成数据，图片在 GitHub 就能看到。
+## 按需要查看示例与运行
 
-[交互演示](docs/public-demo.md)提供单个 HTML，可下载后直接用浏览器打开，切换设备、目标和记录覆盖，体验反馈如何暂停不适合的行动。当前 GitHub Pages 需管理员首次启用；尚未将未部署的网页地址作为在线入口。
+[完整合成报告](docs/sample-health-report.md)展示输出结构；[可选首次执行](docs/agent-quickstart.md)可用生产分析器生成合成报告；[交互示例](docs/public-demo.md)只展示固定示例。README 的产品主张图是方法流程展示，不是真人健康结果或已运行服务。
 
-## 当前能用到什么程度
+阅读仓库不会自动连接账号、保存私人记忆或启动持续监控。决定使用哪些数据、放在哪里处理之后，再进入[个人部署](docs/install.md)。公开仓库不保存真人记录和凭证。GitHub Pages 上线尚未验证。
 
-这是 v0.6 开发者原型：有导出读取器、实验性 Google API、中文个人操作界面、定期 Markdown/JSON 报告、可替换模型和可选飞书渠道。20 行设备目录是调研范围，不能当作 20 款已验证集成。
-
-专业结构不等于医生出具报告：公开论文与指南可以追溯，但软件效果、基线参数和真实设备兼容性尚未临床验证。模型不能代替确定性统计；反馈不证明干预效果。详见[方法论](docs/report-methodology.md)和[安全说明](SECURITY.md)。
-
-GitHub 展示说明、源码和合成示例，不运行你的私人监控。真实健康记录、模型密钥和授权凭证应放在自己的私人部署环境。看懂后再进入[安装说明](docs/install.md)；本机监听地址只用于部署后的个人操作。
+公开仓库名为 HealthOS-Hardware-Skill，Python 包仍为 healthos-open。面向检索与 Agent 的入口是 [llms.txt](llms.txt)、[AI_CONTEXT.md](AI_CONTEXT.md) 与 [能力清单](healthos-skill.json)。它们帮助读者判断用途，不保证 Agent 路过、搜索排序或自动激活。

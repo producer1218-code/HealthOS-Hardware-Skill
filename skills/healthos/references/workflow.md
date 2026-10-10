@@ -1,6 +1,6 @@
 # Existing wearable to personal agent
 
-Reviewed 2026-10-09; implementation v0.6 development. Public repository: https://github.com/producer1218-code/healthos-open . Consult the repository's current field table and vendor access rules when connecting real accounts.
+Reviewed 2026-10-09; implementation v0.6 development. Public repository: https://github.com/producer1218-code/HealthOS-Hardware-Skill . Consult the repository's current field table and vendor access rules when connecting real accounts.
 
 ## Choose a permitted source
 

@@ -4,7 +4,11 @@
 
 ## HealthOS Hardware Skill 是什么？ / What is HealthOS Hardware Skill?
 
-HealthOS Hardware Skill 是开源的个人健康 Agent 指引包及配套 Python 运行时。它指导用户把允许使用的已有健康硬件记录接入自己的 Agent，结合目标、数据覆盖、个人趋势、证据和反馈形成定期健康观察报告。仓库地址仍为 healthos-open，不是医院信息系统。
+HealthOS Hardware Skill 是开源的个人健康 Agent 指引包及配套 Python 运行时。它指导用户把允许使用的已有健康硬件记录接入自己的 Agent，结合目标、数据覆盖、个人趋势、证据和反馈形成定期健康观察报告。仓库地址为 HealthOS-Hardware-Skill，不是医院信息系统。
+
+## 已有 Agent，第一步要安装或填 key 吗？
+
+不用。先给 Agent [START_HERE.md](../START_HERE.md)，说明设备和健康问题。它按[观察方法](observation-method.md)解释开放数据、澄清诉求并提出方案。只有真实执行才需要对应连接器、权限与运行环境；已有 Agent 不需要再给 HealthOS 一个模型 key。合成报告是可选示例。
 
 ## Fitbit 数据怎样接入 AI Agent？ / How can Fitbit data reach my agent?
 

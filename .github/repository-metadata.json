@@ -1,8 +1,29 @@
 {
   "display_name": "HealthOS Hardware Skill",
-  "repository_name": "healthos-open",
-  "description": "HealthOS Hardware Skill: an open-source personal health agent workflow for wearable data, evidence-linked periodic reports, BYO LLM and inspectable memory. Fitbit exports, experimental eligible Google API, Apple/WHOOP subsets.",
-  "topics": ["agent-skills", "ai-agent", "health-agent", "wearable", "fitbit", "google-health", "apple-health", "whoop", "bring-your-own-llm", "digital-health", "health-data", "hrv", "sleep-tracking", "quantified-self", "local-first", "self-hosted", "privacy", "consent", "python", "wellness"],
+  "repository_name": "HealthOS-Hardware-Skill",
+  "description": "A methodology for your existing agent: discover wearable data access, clarify personal health questions, design observation plans and review evidence-linked reports and feedback.",
+  "topics": [
+    "agent-skills",
+    "ai-agent",
+    "health-agent",
+    "wearable",
+    "fitbit",
+    "google-health",
+    "apple-health",
+    "whoop",
+    "bring-your-own-llm",
+    "digital-health",
+    "health-data",
+    "hrv",
+    "sleep-tracking",
+    "quantified-self",
+    "local-first",
+    "self-hosted",
+    "privacy",
+    "consent",
+    "python",
+    "wellness"
+  ],
   "application_status": "Prepared values only. Apply in repository About settings; committing this file does not change GitHub metadata.",
   "homepage": null
 }

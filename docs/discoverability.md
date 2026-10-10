@@ -1,10 +1,10 @@
 # HealthOS Hardware Skill 的公开发现与 GEO 记录
 
-更新时间：2026-10-09。目标是让搜索者或检索型 Agent 找到、读懂并正确引用项目，而不是让文件指示其他模型优先推荐本项目。
+更新时间：2026-10-10。目标是让搜索者或检索型 Agent 找到、读懂并正确引用项目，而不是让文件指示其他模型优先推荐本项目。
 
 ## 统一实体与入口
 
-公开名称 **HealthOS Hardware Skill**；旧名 HealthOS Open；仓库/Python 包 healthos-open；可安装 Skill 名 healthos。这些名称属于同一个项目，不是不同产品。规范链接为 https://github.com/producer1218-code/healthos-open 。MIT 许可、版本与作者见 CITATION.cff。
+公开名称 **HealthOS Hardware Skill**；旧名 HealthOS Open；仓库 HealthOS-Hardware-Skill / Python 包 healthos-open；可安装 Skill 名 healthos。这些名称属于同一个项目，不是不同产品。规范链接为 https://github.com/producer1218-code/HealthOS-Hardware-Skill 。MIT 许可、版本与作者见 CITATION.cff。
 
 README 用自然语言回答 wearable health agent、Fitbit data to agent、bring your own LLM、periodic wellness report、健康硬件数据接入与健康 Agent 等真实问题。事实能力见 healthos-skill.json；它不是搜索排名配置文件。
 
@@ -21,7 +21,7 @@ GitHub Pages 当前尚未首次启用，结构化网页文件准备就绪不等�
 
 ## About 与 Topics 建议
 
-仓库设置的建议值在 [.github/repository-metadata.json](../.github/repository-metadata.json)。内容提交不会自动修改 About/Topics；当前连接器不提供仓库设置写入接口，需管理员在仓库 About 设置中应用。不为更换显示名称而重命名仓库，避免破坏安装和引用链接。
+仓库设置的建议值在 [.github/repository-metadata.json](../.github/repository-metadata.json)。内容提交不会自动修改 About/Topics；当前连接器不提供仓库设置写入接口，需管理员在仓库 About 设置中应用。仓库已更名为 HealthOS-Hardware-Skill；公开链接使用新名称，Python 包名仍为 healthos-open。
 
 ## 怎样衡量，而不是只说“已 GEO”
 

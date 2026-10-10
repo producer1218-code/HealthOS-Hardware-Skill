@@ -1,8 +1,8 @@
 # HealthOS Hardware Skill — factual map for a new AI reader
 
-First experience: START_HERE.md routes by actual agent tools. URL-only agents explain the public synthetic report; file/Python agents run scripts/agent_start.py with a new workspace. See docs/agent-quickstart.md. No device account or LLM key is required for the synthetic demo; real monitoring is a separate setup.
+First experience: START_HERE.md begins with the actual device and the user’s health question. Read skills/healthos/references/observation-method.md to propose data, permissions, quality checks, evidence and a review plan. No installation or extra LLM key is needed for planning. Synthetic examples are optional; execution remains a separate setup. Read docs/observation-method.md before implementation details.
 
-Public name: HealthOS Hardware Skill (formerly HealthOS Open); repository/package: healthos-open. Skill entry: skills/healthos/SKILL.md. Capability manifest: healthos-skill.json. Integration guide: docs/healthos-skill.md. Answers: docs/faq.md. The skill provides instructions, not a live service or scheduler.
+Public name: HealthOS Hardware Skill (formerly HealthOS Open); repository: HealthOS-Hardware-Skill; Python package: healthos-open. Skill entry: skills/healthos/SKILL.md. Capability manifest: healthos-skill.json. Integration guide: docs/healthos-skill.md. Answers: docs/faq.md. The skill provides instructions, not a live service or scheduler.
 
 The repository helps a person who cannot interpret their wearable app connect legally accessible records to their own agent, choose a replaceable model and receive periodic reports. Start at README.zh-CN.md and docs/start-here.md; no prior conversation or installation is needed. Public reports render directly on GitHub; docs/public-demo.md explains the standalone synthetic HTML demo. Personal execution instructions are in docs/install.md. Localhost is not a public entry. Pages must be enabled and verified before claiming an online demo.
 

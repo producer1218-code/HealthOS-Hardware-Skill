@@ -1,0 +1,17 @@
+{
+  "schema_version": "healthos-observation-plan-v1",
+  "status": "proposal_requires_user_confirmation",
+  "synthetic_template": true,
+  "runtime_import_supported": false,
+  "question": null,
+  "intended_benefit": null,
+  "device": {"brand": null, "model": null, "phone_platform": null},
+  "access": {"route": null, "eligibility": "unverified", "official_source_url": null, "checked_on": null, "runtime_adapter": null, "implemented_fields": []},
+  "observations": [],
+  "permissions": {"state": "pending", "selected_fields": [], "purposes": [], "processing_location": null, "external_model_sharing": "pending", "delivery": "pending", "retention": null},
+  "method": {"evidence": [], "engineering_assumptions": [], "comparability_rules": ["keep source/device/method streams separate", "missing is not zero", "do not merge RMSSD and SDNN"]},
+  "review": {"report_cadence_days": null, "next_review": null, "action": null, "feedback_fields": ["attempted", "suitability", "self_reported_outcome"], "pause_rules": []},
+  "memory": {"store": null, "authorized_items": [], "correction_and_deletion": null},
+  "gaps": [],
+  "next_step": null
+}

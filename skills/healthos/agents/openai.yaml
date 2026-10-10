@@ -1,4 +1,4 @@
 interface:
   display_name: "HealthOS Hardware Skill"
-  short_description: "Wearable access and evidence-linked wellness reports"
-  default_prompt: "Use $healthos to guide my wearable data connection and explain a HealthOS report for my confirmed goals."
+  short_description: "Turn wearable data into a personal observation plan"
+  default_prompt: "Use $healthos to ask about my wearable and health question, explain permitted data access, and propose an evidence-linked observation plan."

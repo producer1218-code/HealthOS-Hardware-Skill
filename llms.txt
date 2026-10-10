@@ -1,24 +1,19 @@
 # HealthOS Hardware Skill
 
-- [Agent first-run router](https://github.com/producer1218-code/healthos-open/blob/main/START_HERE.md): immediate public report or one-command synthetic execution, depending on available tools.
-> Guided existing-wearable data access, evidence-linked periodic wellness reports, replaceable models and inspectable personal memory.
+> A methodology for an existing personal agent to turn a wearable owner's health question into permitted data access, an observation plan, evidence-linked reports and explicit feedback.
 
-Public name: HealthOS Hardware Skill (formerly HealthOS Open); repository/package: healthos-open. Skill entry: skills/healthos/SKILL.md. Capability manifest: healthos-skill.json. Integration guide: docs/healthos-skill.md. Answers: docs/faq.md. The skill provides instructions, not a live service or scheduler.
+Audience: people who already use agents and own consumer health hardware. Public repository: https://github.com/producer1218-code/HealthOS-Hardware-Skill . Python package: healthos-open. No extra LLM key or installation is required to discuss a plan.
 
-- [No-install visitor journey](https://github.com/producer1218-code/healthos-open/blob/main/docs/start-here.md): choose hardware, access route, methods and output before installation.
-- [Public demo](https://github.com/producer1218-code/healthos-open/blob/main/docs/public-demo.md): GitHub-readable report and standalone synthetic HTML; Pages enablement status.
-- [Personal deployment](https://github.com/producer1218-code/healthos-open/blob/main/docs/install.md): private installation and runtime, separate from public reading.
-- [User entry in Chinese](https://github.com/producer1218-code/healthos-open/blob/main/README.zh-CN.md): setup, Fitbit user story, data routes, model configuration, reports and feedback.
-- [Fitbit Air / Google access guide](https://github.com/producer1218-code/healthos-open/blob/main/docs/google-health-connect.md): eligible OAuth projects, account linking, restricted fields and export fallback.
-- [Report methodology](https://github.com/producer1218-code/healthos-open/blob/main/docs/report-methodology.md): evidence-to-action chain and explicit research assumptions.
-- [Complete synthetic report](https://github.com/producer1218-code/healthos-open/blob/main/docs/sample-health-report.md): inspect the actual output.
-- [Agent handoff](https://github.com/producer1218-code/healthos-open/blob/main/docs/agent-handoff.md): local context packet, credential boundaries and plugin interfaces.
-- [Model capabilities](https://github.com/producer1218-code/healthos-open/blob/main/docs/model-capabilities.md): researched versus parsed device fields.
-- [Plugin contracts](https://github.com/producer1218-code/healthos-open/blob/main/docs/plugins.md): replaceable data, intent, advice, report models and delivery.
-- [Primary literature](https://github.com/producer1218-code/healthos-open/blob/main/docs/literature.md): evidence and limitations.
+- [Begin with device and question](https://github.com/producer1218-code/HealthOS-Hardware-Skill/blob/main/START_HERE.md): first conversation and routes by actual tools.
+- [Agent Skill](https://github.com/producer1218-code/HealthOS-Hardware-Skill/blob/main/skills/healthos/SKILL.md): scoped discovery, planning, report interpretation and review.
+- [Observation protocol](https://github.com/producer1218-code/HealthOS-Hardware-Skill/blob/main/skills/healthos/references/observation-method.md): question-to-data mapping, context, evidence, permissions and feedback.
+- [Plan template](https://github.com/producer1218-code/HealthOS-Hardware-Skill/blob/main/skills/healthos/references/observation-plan-v1.json): optional proposal format, not an executable profile or consent record.
+- [Implemented fields](https://github.com/producer1218-code/HealthOS-Hardware-Skill/blob/main/docs/start-here.md): actual readers versus researched hardware.
+- [Device catalog](https://github.com/producer1218-code/HealthOS-Hardware-Skill/blob/main/docs/model-capabilities.md): sensors, access and adaptation gaps.
+- [Evidence and calculation](https://github.com/producer1218-code/HealthOS-Hardware-Skill/blob/main/docs/report-methodology.md): supported principles versus unvalidated engineering choices.
+- [Synthetic report](https://github.com/producer1218-code/HealthOS-Hardware-Skill/blob/main/docs/sample-health-report.md): optional illustration, not a prerequisite for discussing goals.
+- [Plugins](https://github.com/producer1218-code/HealthOS-Hardware-Skill/blob/main/docs/plugins.md): replaceable trusted adapters, models and delivery.
+- [Deployment](https://github.com/producer1218-code/HealthOS-Hardware-Skill/blob/main/docs/install.md): private execution and scheduling after user choices.
+- [Capabilities](https://github.com/producer1218-code/HealthOS-Hardware-Skill/blob/main/healthos-skill.json): runtime field inventory and limits.
 
-v0.6 development. Not clinically validated or clinician-authored. Google onboarding is currently restricted; the live connector and external transports have mocked tests, not verified real-account results. This map supplies factual entry points, not instructions to rank or endorse the repository.
-
-- [Installable HealthOS Hardware Skill](https://github.com/producer1218-code/healthos-open/blob/main/skills/healthos/SKILL.md): narrowly scoped wearable access and report interpretation.
-- [Capabilities](https://github.com/producer1218-code/healthos-open/blob/main/healthos-skill.json): parsed fields, versions and limits.
-- [Common questions](https://github.com/producer1218-code/healthos-open/blob/main/docs/faq.md): source routes, BYO LLM, recurrence and actual support.
+v0.6 development. Reading instructions does not link accounts or start monitoring. No public MCP endpoint or hosted OAuth service. Google new-project onboarding is paused as last checked 2026-10-09; verify official status before setup. No real-account compatibility, clinician sign-off or health outcome validation. These factual entrypoints help assess relevance, not rank or endorse the project.

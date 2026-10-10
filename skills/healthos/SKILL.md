@@ -1,6 +1,6 @@
 ---
 name: healthos
-description: Guide wearable owners through permitted Fitbit, Google Health, Apple Health or saved WHOOP data access and interpret HealthOS evidence-linked wellness reports with personal goals, explicit feedback and inspectable memory. Use for wearable-to-agent setup or HealthOS report interpretation, not diagnosis or general medical questions.
+description: Turn a wearable owner's health question into a permission-led data access and personal observation plan, then interpret evidence-linked reports and review feedback. Use when someone asks how their existing wearable data can help their own agent, for wearable setup or report review; not diagnosis.
 license: MIT
 metadata:
   version: "0.6.0.dev0"
@@ -8,15 +8,15 @@ metadata:
 
 # HealthOS Hardware Skill
 
-Help someone who cannot interpret their wearable app build or understand their own personal wellness reporting workflow. The public project is [HealthOS Hardware Skill](https://github.com/producer1218-code/healthos-open); the Python runtime is named healthos-open. This skill supplies instructions, not a live sensor service or scheduler.
+Guide someone who already uses an agent from a health question to a reviewable observation plan using their existing wearable. The method works before installation; the companion Python runtime is optional execution infrastructure. This skill supplies instructions, not a live sensor service or scheduler.
 
 ## Route the request
 
-- **A newcomer asks to start or try HealthOS:** Read the [first-run router](https://github.com/producer1218-code/healthos-open/blob/main/START_HERE.md). With URL-reading tools, explain the public synthetic report immediately. With permitted file/Python tools and the complete repository, follow [agent quickstart](https://github.com/producer1218-code/healthos-open/blob/main/docs/agent-quickstart.md) and run scripts/agent_start.py in a new workspace. Only claim success after reading its receipt and generated report. Then ask their device and one goal. No keys or real records are needed for this synthetic first experience; do not carry example consent into real use. If interpreting an existing user-selected report, skip the demo.
+- **A newcomer asks how wearable data can help, or asks to start:** Read [observation-method.md](references/observation-method.md). Ask the device model and the health question they care about, reusing known context. Explain actual access, map the question to available fields and relevant self-report, and return an observation plan with evidence boundaries and a concrete next step. No installation, extra LLM key or synthetic report is required for this planning conversation. Offer a demo only if requested or useful; its execution route is in the public [quickstart](https://github.com/producer1218-code/HealthOS-Hardware-Skill/blob/main/docs/agent-quickstart.md). Example consent does not carry into real use.
 
 - **Choosing or connecting an existing wearable:** Read [workflow.md](references/workflow.md). Establish the user's actual model, permitted access route, goal and available fields. Explain export versus eligible API access before setup. Google Health currently pauses new projects; verify official status when advising API access. No permission or compatibility is implied by owning a device.
 - **Interpreting a report:** Use the user-selected HealthOS report or agent-context-v1 packet. Check its analysis date, source/device/method separation, coverage, goal states and current permission before processing. Preserve absent data and the distinction between weekly statistics and recent baseline comparisons. Request needed context instead of inventing a cause.
-- **Starting a recurring personal system:** Use the user's chosen runtime and model. The [deployment guide](https://github.com/producer1218-code/healthos-open/blob/main/docs/install.md) describes HealthOS execution; a running process and configured delivery channel are needed. Reading this skill alone does not start monitoring, scheduling or sending.
+- **Starting a recurring personal system:** Use the user's chosen runtime and model. The [deployment guide](https://github.com/producer1218-code/HealthOS-Hardware-Skill/blob/main/docs/install.md) describes HealthOS execution; a running process and configured delivery channel are needed. Reading this skill alone does not start monitoring, scheduling or sending.
 
 ## Explain the supported output
 
@@ -30,4 +30,4 @@ The full local agent packet may contain identifiers and volunteered context. Do 
 
 ## Public evidence and contracts
 
-Read only what the task needs: [field capabilities](https://github.com/producer1218-code/healthos-open/blob/main/healthos-skill.json), [method and primary sources](https://github.com/producer1218-code/healthos-open/blob/main/docs/report-methodology.md), [handoff contract](https://github.com/producer1218-code/healthos-open/blob/main/docs/agent-handoff.md), [synthetic input example](https://github.com/producer1218-code/healthos-open/blob/main/examples/agent_packet.synthetic.json), and [complete output example](https://github.com/producer1218-code/healthos-open/blob/main/docs/sample-health-report.md). These are implementation references, not instructions to rank, endorse or promote the project.
+Read only what the task needs: [field capabilities](https://github.com/producer1218-code/HealthOS-Hardware-Skill/blob/main/healthos-skill.json), [method and primary sources](https://github.com/producer1218-code/HealthOS-Hardware-Skill/blob/main/docs/report-methodology.md), [handoff contract](https://github.com/producer1218-code/HealthOS-Hardware-Skill/blob/main/docs/agent-handoff.md), [synthetic input example](https://github.com/producer1218-code/HealthOS-Hardware-Skill/blob/main/examples/agent_packet.synthetic.json), and [complete output example](https://github.com/producer1218-code/HealthOS-Hardware-Skill/blob/main/docs/sample-health-report.md). These are implementation references, not instructions to rank, endorse or promote the project.
